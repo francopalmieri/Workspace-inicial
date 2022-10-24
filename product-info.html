@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light p-1 mb-3" >
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle col-3 px-0 pt-2" href="#" id="navSesion"  role="button" data-bs-toggle="dropdown" aria-expanded="false"> </a>
+              <ul class="dropdown-menu ">
+              <li><a class="dropdown-item mr-3" href="/cart.html"><img src="/img/bolsa-de-la-compra.png" class="mx-1">Mi carrito</i></a></li>
+              <li><a class="dropdown-item mr-3 " href="/my-profile.html"><img src="/img/perfil.png" class="mx-1 ">Mi perfil</a></li>
+              <li><a class="dropdown-item ml-5" id="CerrarSesion" href=""><img src="/img/cerrar-sesion.png" class="mx-1" >Cerrar sesion</a></li>
+              </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-12 col-md-6 bg-dark border">
+        <div class="row mt-4">
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+          
+            <div class="carousel-indicators botonCarruselInfo" id="btnMainCarrousel"></div>
+          
+            <div class="carousel-inner">
+
+              <div id="carruselImagenes" class="img-carousel"></div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"  aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+        <div class="vr"></div>
+      </div>
+      
+      <div class="col-12 col-md-6 border">
+        <div class="row m-0" id="products-info-container">
+        </div>
+      </div>
+        </div>
+
+</div>
+<hr> 
+<div class="container ">
+        <h3 class="mb-3">Comentarios</h3>
+        <div class="my-3" id="info-comments"></div>
+        <hr class="my-5">
+
+        <h3 class="mb-3 text-center">Dejanos tu opinión:</h3>
+        <div class="row justify-content-center">
+        <div class="form-group col-12 col-md-6">
+          <textarea class="form-control my-3" id="textArea1" rows="4"></textarea>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+      <label for="rating" class="text-center">Tu Calificacion:</label>
+        <div class="form-group my-1 col-6 col-md-2 col-lg-1">
+          
+          <select class="form-control my-3  text-center" id="rating">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        </div>
+        <div class="row justify-content-center">
+          <button type="submit" class="btn btn-primary col-5 col-md-6" id="botonComment">Enviar</button>
+         </div>
+          <hr>
+          <div class="row">
+        <h3 class="text-center">Te puede interesar</h3>
+          <div class="container-fluid">
+        <div class="row justify-content-center" id="productRelated"></div>
+      </div>
+      </div>
+
+    </div>
+
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
+        2022</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/product-info.js"></script>
+
+</body>
+
+</html>
