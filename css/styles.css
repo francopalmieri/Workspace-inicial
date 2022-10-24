@@ -1,0 +1,504 @@
+.jumbotron,
+.card-body,
+.container,
+.site-header {
+  font-family:  Helvetica, sans-serif
+}
+
+
+.jumbotron{
+  font-family: 'Bebas Neue', serif !important;
+}
+.site-header {
+  font-size: 20px;
+}
+.jumbotron .display-4 {
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.jumbotron {
+  height: 50vh;
+  padding: 5em inherit;
+  margin-bottom: 0;
+  background-color: #53c0fb;
+  background: url("../img/cover_back.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: black;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  text-shadow: 1px 1px 2px grey;
+}
+
+.jumbotron .lead {
+  font-size: 38px;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: 0.25rem;
+}
+
+.site-header a {
+  color: white;
+  transition: ease-in-out color 0.15s;
+}
+
+.site-header .dropdown-menu a {
+  color: black;
+}
+
+.dropzone {
+  border: 2px dashed #0087f7;
+  border-radius: 5px;
+  background: white;
+}
+
+.img-fit {
+  max-height: 100%;
+}
+
+.alert {
+  position: fixed;
+  top: 80px;
+  width: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  top: 50%;
+  left: 50%;
+}
+
+.cursor-active {
+  cursor: pointer;
+}
+
+.left {
+  float: left;
+  padding: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+#spinner-wrapper {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1021;
+  display: none;
+}
+
+main {
+  min-height: calc(100vh - 210px);
+}
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.checked {
+  color: orange;
+}
+
+/* ESTILOS DE LOGIN*/
+
+
+/* IMPORTACION DE ANIMACION VIBRANTE*/
+@-webkit-keyframes shake-horizontal{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}10%,30%,50%,70%{-webkit-transform:translateX(-10px);transform:translateX(-10px)}20%,40%,60%{-webkit-transform:translateX(10px);transform:translateX(10px)}80%{-webkit-transform:translateX(8px);transform:translateX(8px)}90%{-webkit-transform:translateX(-8px);transform:translateX(-8px)}}@keyframes shake-horizontal{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}10%,30%,50%,70%{-webkit-transform:translateX(-10px);transform:translateX(-10px)}20%,40%,60%{-webkit-transform:translateX(10px);transform:translateX(10px)}80%{-webkit-transform:translateX(8px);transform:translateX(8px)}90%{-webkit-transform:translateX(-8px);transform:translateX(-8px)}}
+
+
+/* ESTILOS DE google*/
+
+
+
+
+
+
+
+.campo-texto {
+  border-radius: 10px;
+  border-color: #0087f7;
+  box-shadow: 2px 2px 2px #72abda;
+  background-color: rgba(255, 255, 255, 0.591);
+}
+
+
+#moverEmailAlert{
+  -webkit-animation:shake-horizontal .8s cubic-bezier(.455,.03,.515,.955) both;
+  animation:shake-horizontal .8s cubic-bezier(.455,.03,.515,.955) both
+}  
+
+#moverPasswordAlert{
+  -webkit-animation:shake-horizontal .8s cubic-bezier(.455,.03,.515,.955) both;
+  animation:shake-horizontal .8s cubic-bezier(.455,.03,.515,.955) both
+}
+
+.campo-texto:focus {
+  background-color: #f8fcff;
+  opacity: 0.8;
+}
+
+.boton-login:hover {
+  background-color: #042a49;
+  color: #78d594;
+}
+
+.boton-login {
+  background-color: #042a49cc;
+  color: #ffffff;
+  border-radius: 10px;
+}
+
+.titulo-login{
+  color:  #78d594;
+  font-size: 30px;
+  font-weight: bold
+}
+.container-login{
+  border-radius: 20px;
+  background-color: #f8f9fa; 
+box-shadow: 5px 5px 50px black;
+}
+
+
+
+/*ESTILO EN LOGO*/
+.logo {
+  width: 30%;
+}
+
+
+
+/*ESTILO EN LA NAVBAR*/
+
+img.nav-link.logo {
+  width: 150px;
+}
+
+a.nav-link {
+  width: 150px;
+  margin-top: 5px;
+  color: #000;
+}
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-light.p-1 {
+  padding: 10px 0px;
+  box-shadow: 2px 0px 15px;
+  
+}
+
+.navBarUsuario {
+  cursor: active;
+  color: #53c0fb;
+}
+.perfil-logo{
+  margin-top: 8px;
+}
+
+/* ESTILOS DE CATEGORIA DE PRODUCTOS*/
+
+/* URLS*/
+
+@font-face {
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/bebasneue/v9/JTUSjIg69CK48gW7PXoo9Wlhyw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+.k{
+  color: #53f2faa4;
+}
+
+/* ESTILOS DE PAGINA PRODUCTOS*/
+
+#products-name {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+box-shadow: 1px 1px black;
+  background-color: #5a92b3;
+}
+
+#containerInfoProd {
+  background-color: #ffffff45;
+  font-family: 'Bebas Neue';
+}
+
+.card {
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+
+}
+
+.card:hover {
+  box-shadow: 10px 5px 5px #7e7e7e;
+  opacity: 0.7;
+  transition: 500ms;
+  border-color: #5a92b3;
+}
+
+#buscadorF {
+  border-color: #008cff;
+  background-color: #f0fcff;
+  ;
+}
+
+#buscadorF:hover {
+  box-shadow: 2px 5px 5px #7e7e7e;
+
+}
+#center.name {
+  justify-content: center;
+  text-align: center;
+}
+
+/* ESTILOS DE PAGINA DE INFORMACION DE PRODUCTOS*/
+
+.i:hover {
+  box-shadow: 2px 5px 5px #7e7e7e;
+  transform: scale(1.3);
+}
+.commentProd{
+  
+  background-color: #79777745;
+  border-radius: 10px;
+}
+
+.addComment{
+  background-color: #56555545;
+  border-radius: 10px;
+}
+.logo-usuario{
+  width: 10%;
+  background-image: url(img/cuarto.jpg)
+}
+.dropdown-item:hover{
+color: #53c0fb;
+
+}
+.a{
+  position: relative;
+  margin-bottom: 22%;
+  
+}
+.tituloInfo{
+  background-color: #bee6feaf;
+  border-radius: 10px;
+  padding-left: 10px;
+  font-family: 'Bebas Neue', serif !important;
+  
+}
+.similarProducts:hover{
+  transform: translate(5px, -5px);
+  transition: .5s;
+}
+
+ @-webkit-keyframes shake-horizontal{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}10%,30%,50%,70%{-webkit-transform:translateX(-10px);transform:translateX(-10px)}20%,40%,60%{-webkit-transform:translateX(10px);transform:translateX(10px)}80%{-webkit-transform:translateX(8px);transform:translateX(8px)}90%{-webkit-transform:translateX(-8px);transform:translateX(-8px)}}@keyframes shake-horizontal{0%,100%{-webkit-transform:translateX(0);transform:translateX(0)}10%,30%,50%,70%{-webkit-transform:translateX(-10px);transform:translateX(-10px)}20%,40%,60%{-webkit-transform:translateX(10px);transform:translateX(10px)}80%{-webkit-transform:translateX(8px);transform:translateX(8px)}90%{-webkit-transform:translateX(-8px);transform:translateX(-8px)}}
+
+.img-carousel:hover{
+  transform: scale(1.05);
+  overflow: hidden;
+}
+.img-carousel{
+  transition: transform .5s;
+  overflow: hidden;
+  object-fit: cover;
+ 
+}
+
+
+/*prueba*/
+
+
+
+
+
+
+/* PAGINA DE CARRITO*/
+.title-cart{
+  font-family: 'Bebas Neue', serif !important;
+}
+.cantidad-producto{
+  text-align: center;
+  width: 50px
+}
+
+.totalCarrito{
+  background-color: #b7e0f8;
+ border-radius: 10px;
+ text-align: center;
+ box-shadow: 2px 2px 20px rgb(222, 222, 222);
+ font-family: 'Bebas Neue', serif !important;
+ 
+}
+.barra-product{
+  background-color: #b7e0f8;
+  border-color: #000000;
+  font-family: 'Bebas Neue', serif !important;
+}
+.btn-product{
+  color:#000000;
+  text-decoration:none;
+}
+
+.btn-product:hover{
+  color:#53c0fb;
+  text-decoration:none;
+  font-family: 'Bebas Neue', serif !important;
+}
+.subtitulosCart{
+  color: #c20000;
+  text-align: start;
+  font-family: 'Bebas Neue', serif !important;
+}
+
+.tipoDeEnvio{
+  box-shadow: 2px 2px 10px rgb(204, 201, 201);
+  border-radius: 5px;
+  font-family: 'Bebas Neue', serif !important;
+}
+.r{
+  font-size: 20px;
+}
+.promocionText{
+  margin-left: 10px;
+}
+
+.contenedor-carrito{
+  font-family: 'Bebas Neue', serif !important;
+  background-color: #f1f1f1;
+  box-shadow: 2px 2px 10px rgb(204, 201, 201);
+  border-radius: 10px;
+}
+.subtitulosCartProd{
+  text-align: center;
+  justify-content: center;
+}
+
+/*IMPORTACION DE ANIMACIONES*/
+
+/*BORROSO*/
+ @-webkit-keyframes text-focus-in{0%{-webkit-filter:blur(12px);filter:blur(12px);opacity:0}100%{-webkit-filter:blur(0);filter:blur(0);opacity:1}}@keyframes text-focus-in{0%{-webkit-filter:blur(12px);filter:blur(12px);opacity:0}100%{-webkit-filter:blur(0);filter:blur(0);opacity:1}}
+
+/*ESTILOS EN LA PAGINA PRINCIPAL*/
+
+#carouselPrincpial{
+  position: relative;
+}
+
+.tituloCarousel{
+  font-family: 'Bad Script', 'cursive;';
+  font-size: 30px;
+  padding: 12px 0px;
+  background-color: #b7e0f8;
+  border-color:5px solid black;
+  -webkit-animation:text-focus-in 1s cubic-bezier(.55,.085,.68,.53) both;
+  animation:text-focus-in 1s cubic-bezier(.55,.085,.68,.53) both
+}
+  
+.imgCarouselIndex:hover{
+  backdrop-filter: blur(4px);
+  background-position: center;
+  background-size: cover;
+}
+
+
+
