@@ -500,5 +500,10 @@ color: #53c0fb;
   background-size: cover;
 }
 
+#SubtotalGeneral,#totalGeneral,#costoEnvio{
+  font-size: 18px;
+}
 
-
+#sub,#cos,#tot{
+  font-size: 18px;
+}
