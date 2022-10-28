@@ -4,9 +4,10 @@ let listaElementos = [];
 //variable global de la suma de los subtotales individuales
 let todoUSD = [];
 
-//variables definidas que funcionan como booleanos
+//variables definidas que funcionan como alternadores
 let costoAlternar = [];
 let metodoAlternar = [];
+let minimoCantidadProducto = [];
 
 function eliminarProdCart(id) {//funcion que toma como parametro la id del producto al cual estoy seleccionando
 
@@ -31,15 +32,15 @@ function eliminarProdCart(id) {//funcion que toma como parametro la id del produ
 
   conversionUSD()
   alternarCostoEnvio()
-  
+
   if (listaElementos == "") {
     document.getElementById('SubtotalGeneral').innerHTML = "USD" + ' ' + 0;
   }
 
 }
-
+//funcion que redirije al producto al apretar en su imagen
 function redirigirProductos(id) {
-  localStorage.setItem('productID', id);//redirije al producto al apretar en su imagen
+  localStorage.setItem('productID', id);
   window.location.href = "product-info.html";
 }
 
@@ -68,8 +69,8 @@ function verMiObjetoCarrito() {
     </div>
     <div class="col-2"><a href="#" class="btn-product" onclick="redirigirProductos(${elemento.id})">${elemento.name}</a></div>
     <div class="col-2 lugarPrecio"> ${elemento.currency} ${elemento.cost}</div>
-    <div class="col-2"><input type="number" class="cantidad-producto cantidadDelProducto" oninput="subtotalProducto(${elemento.id})"
-     value="${elemento.cantidad}" step="1" min="1" size="4"></div>
+    <div class="col-2"><input type="number" class="cantidad-producto cantidadDelProducto p-0 m-0" oninput="subtotalProducto(${elemento.id})"
+     value="${elemento.cantidad}" step="1" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1" autocomplete="off" required></div>
     <div class="col-2 subtotalProducto"> ${elemento.currency} ${subtotal}</div>
     <div class="col-2"><a onclick="eliminarProdCart(${elemento.id})"><i class="text-danger fas fa-trash fa-lg cursor-active"></i></a></div>
     </div>
@@ -95,12 +96,19 @@ function subtotalProducto(id) {
   Lo actualizo en el almacenamiento
   Multiplico cantidad del valor del input por la del precio del objeto 
   en el que estoy y lo imprimo en pantalla
+  verifico que la cantidad de ese campo no sea menor a 1 
+  y modifico una variable a un numero para usarla como alternador
   */
 
   for (let i = 0; i < productosEnCarrito.length; i++) {
     let producto = productosEnCarrito[i];
     if (producto.id === id) {
       producto.cantidad = document.getElementsByClassName('cantidadDelProducto')[i].value;
+      if (producto.cantidad < 1 || producto.cantidad == '' ||producto.cantidad ==null||producto.cantidad ==undefined) {
+        minimoCantidadProducto = 2
+      } else {
+        minimoCantidadProducto = 1
+      }
       localStorage.setItem('objetosEnCarrito', JSON.stringify(productosEnCarrito));
       document.getElementsByClassName('subtotalProducto')[i].innerHTML = producto.currency + ' ' + producto.cantidad * producto.cost;
     }
@@ -126,18 +134,14 @@ function conversionUSD() {
     }
   }
 }
-//guarda la cantidad establecida en el input 
-//y lo sobreescribe por la cantidad en del objeto.
-//despues entra a un condicional para ejecutar la funcion de USD o UYU
 
-
-
-// cada una de estas funciones se ejcuta cuando presiono sobre su respectivo input radio
+// cada una de estas funciones se ejecuta cuando presiono sobre su respectivo input radio
 // mando al almacenamiento una id especifica de para guardar la posicion del campo seleccionado
 // alterno esa posicion en una variable
 // almaceno el precio del subtotal
 // le saco el porcentaje especifico que require ese campo
 // lo muestra en el pantalla al igual que la suma de ese porcentaje con el subtotal original.
+
 function costoEnvioPremium() {
   localStorage.setItem('metodoEnvio', 1)
   costoAlternar = 1
@@ -147,15 +151,15 @@ function costoEnvioPremium() {
 }
 
 function costoEnvioExpress() {
-  localStorage.setItem('metodoEnvio',2)
+  localStorage.setItem('metodoEnvio', 2)
   costoAlternar = 2;
   let subtotal = todoUSD;
-  document.getElementById('costoEnvio').innerHTML = 'USD' + ' ' + Math.floor((subtotal * 7) / 100)
-  document.getElementById('totalGeneral').innerHTML = 'USD' + ' ' + (subtotal + Math.floor((subtotal * 7) / 100))
+  document.getElementById('costoEnvio').innerHTML = 'USD' + ' ' + Math.floor((subtotal * 7) / 100);
+  document.getElementById('totalGeneral').innerHTML = 'USD' + ' ' + (subtotal + Math.floor((subtotal * 7) / 100));
 }
 
 function costoEnvioStandard() {
-  localStorage.setItem('metodoEnvio',3)
+  localStorage.setItem('metodoEnvio', 3)
   costoAlternar = 3;
   let subtotal = todoUSD;
   document.getElementById('costoEnvio').innerHTML = 'USD' + ' ' + Math.floor((subtotal * 5) / 100)
@@ -163,7 +167,7 @@ function costoEnvioStandard() {
 }
 
 //funcion que alterna entre una funcion u otra dependiendo de una variable global
-function alternarCostoEnvio(){
+function alternarCostoEnvio() {
   if (costoAlternar === 1) {
     costoEnvioPremium()
   } else if (costoAlternar === 2) {
@@ -173,34 +177,38 @@ function alternarCostoEnvio(){
   }
 }
 
-function seleccionEnvio(){
- let metodoSeleccionado=JSON.parse(localStorage.getItem('metodoEnvio'))
-if (metodoSeleccionado === 1) {
-  costoEnvioPremium()
-document.getElementById('cartPremium').checked=true
-} else if (metodoSeleccionado === 2) {
-  costoEnvioExpress()
-  document.getElementById('cartExpress').checked=true
-} else if (metodoSeleccionado === 3) {
-  document.getElementById('cartStandard').checked=true
-  costoEnvioStandard()
+function seleccionEnvio() {
+  let metodoSeleccionado = JSON.parse(localStorage.getItem('metodoEnvio'))
+  if (metodoSeleccionado === 1) {
+    costoEnvioPremium()
+    document.getElementById('cartPremium').checked = true
+  } else if (metodoSeleccionado === 2) {
+    costoEnvioExpress()
+    document.getElementById('cartExpress').checked = true
+  } else if (metodoSeleccionado === 3) {
+    document.getElementById('cartStandard').checked = true
+    costoEnvioStandard()
+  }
 }
-}
-
 
 //SECCION METODO DE PAGO
 
 //cuando presiono el boton del modal 
 //mediante disable deshabilito todos los campos
 document.getElementById('metodoDePago').addEventListener('click', () => {
-  document.getElementById('numeroTarjeta').disabled = true;
-  document.getElementById('codigoSeg').disabled = true;
-  document.getElementById('tarjetaVencimiento').disabled = true;
-  document.getElementById('numCuenta').disabled = true;
+  if (document.getElementById('tarjetaCredito').checked) {
+    document.getElementById('numCuenta').disabled = true;
+  } else if (document.getElementById('transferenciaBancaria').checked) {
+    document.getElementById('numeroTarjeta').disabled = true;
+    document.getElementById('codigoSeg').disabled = true;
+    document.getElementById('tarjetaVencimiento').disabled = true;
+  }
+
 })
 
 //cuando pulso sobre el campo de tarjeta de credito
 //se me habilitan sus campos correspondientes
+//se deshabilitan y se limpian los opuestos
 //sucede lo mismo en la transferencia bancaria
 function habilitarCampoModal() {
 
@@ -210,66 +218,103 @@ function habilitarCampoModal() {
     document.getElementById('codigoSeg').disabled = false;
     document.getElementById('tarjetaVencimiento').disabled = false;
     document.getElementById('numCuenta').disabled = true;
+    document.getElementById('numCuenta').value = '';
   })
 
   document.getElementById('transferenciaBancaria').addEventListener('click', () => {
     metodoAlternar = 2;
+    document.getElementById('numeroTarjeta').value = '';
+    document.getElementById('codigoSeg').value = '';
+    document.getElementById('tarjetaVencimiento').value = '';
+
     document.getElementById('numeroTarjeta').disabled = true;
     document.getElementById('codigoSeg').disabled = true;
     document.getElementById('tarjetaVencimiento').disabled = true;
     document.getElementById('numCuenta').disabled = false;
   })
-
-
 }
 
 //muestro en pantalla el metodo seleccionado en el modal
 function mostrarMetodoDePago() {
   if (metodoAlternar == 1) {
     document.getElementById('metodoSeleccionado').innerHTML = 'Tarjeta de Credito'
-    document.getElementById('invalidCheck').value="Correcto"
   } else if (metodoAlternar == 2) {
     document.getElementById('metodoSeleccionado').innerHTML = 'Transferencia Bancaria'
-    document.getElementById('invalidCheck').value="Correcto"
   }
-
 }
 
-// Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
-(function () {
-  'use strict'
+//cuando el modal se cierre se valida el formulario contenido
+function validarModal() {
+  document.getElementById('modal-metodoDePago').addEventListener('hidden.bs.modal', () => {
 
-  // Obtener todos los formularios a los que queremos aplicar estilos de validación de Bootstrap personalizados
-  var forms = document.querySelectorAll('.needs-validation')
+    let modalForm = document.getElementById('modalForm');
+    let alertaMetodoPago = document.getElementById('alertaFormaDePago');
 
-  // Bucle sobre ellos y evitar el envío
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
+    if (!modalForm.checkValidity()) {
+      alertaMetodoPago.innerHTML = 'El metodo de pago no esta validado';
+      alertaMetodoPago.style.color = 'red';
+    } else {
+      alertaMetodoPago.innerHTML = 'Metodo de pago valido';
+      alertaMetodoPago.style.color = 'green';
+    }
 
-        form.classList.add('was-validated')
-      }, false)
-    })
-})();
+  })
+}
 
+//valido todo el formualrio de mi pagina 
+//incluyendo los campos de cantidad de los productos
+function validarForm() {
+  document.getElementById('botonCompra').addEventListener('click', (e) => {
 
-document.getElementById('botonCompra').addEventListener('click',()=>{
-  document.getElementById('alertita').disabled=false;
-})
+    let productosEnCarrito = JSON.parse(localStorage.getItem('objetosEnCarrito'));
 
+    let modalForm = document.getElementById('modalForm');
+    let formCart = document.getElementById('formularioCarrito');
 
+    if (productosEnCarrito.length === 0) {
+      e.stopPropagation;
+
+      let alertaProdCart = document.getElementById('alertaCantidadProducto');
+          alertaProdCart.innerHTML ='Debes agregar un producto a tu carrito';
+          alertaProdCart.style.color = 'red';
+
+    } else if (!modalForm.checkValidity()) {
+      e.stopPropagation();
+
+      let alertaMetodoPago = document.getElementById('alertaFormaDePago')
+      alertaMetodoPago.innerHTML = 'El metodo de pago no esta validado';
+      alertaMetodoPago.style.color = 'red';
+
+    } else if (!formCart.checkValidity()) {
+      e.stopPropagation();
+      e.preventDefault();
+    } else if (minimoCantidadProducto == 2) {
+      alert('cantidad de producto Debe ser Valida')
+      e.stopPropagation();
+      e.preventDefault();
+    }
+    else {
+      setTimeout(() => {
+        mostrarAlertaDeCompra();
+      }, 1000);
+    }
+
+    modalForm.classList.add('was-validated');
+    formCart.classList.add('was-validated');
+    e.preventDefault();
+  })
+}
+// alerta para mostrar una vez que los campos esten validados
+function mostrarAlertaDeCompra() {
+  document.getElementById("alert-success").classList.add("show");
+}
 //EJECUTO MI CODIGO
-
 
 document.addEventListener('DOMContentLoaded', () => {
   verMiObjetoCarrito()
   conversionUSD()
   seleccionEnvio()
   habilitarCampoModal()
+  validarForm()
+  validarModal()
 })
-
-

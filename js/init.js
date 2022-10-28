@@ -9,7 +9,7 @@ const PRODUCT_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_INFO_PEUGEOUT = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
-const hola = 'https://japceibal.github.io/emercado-api/products/50741.json'
+
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
