@@ -30,20 +30,24 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle col-3 px-0 pt-2" href="#" id="navSesion"  role="button" data-bs-toggle="dropdown" aria-expanded="false"> </a>
-              <ul class="dropdown-menu ">
-              <li><a class="dropdown-item mr-3" href="my-profile.html"><img src="img/perfil.png" class="mx-1 ">Mi perfil</a></li>
-              <li><a class="dropdown-item ml-5" id="CerrarSesion" href=""><img src="img/cerrar-sesion.png" class="mx-1" >Cerrar sesion</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
+            <a class="nav-link dropdown-toggle col-3 px-0 pt-2" href="#" id="navSesion" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false"> </a>
+            <ul class="dropdown-menu ">
+              <li><a class="dropdown-item mr-3" href="my-profile.html"><img src="img/perfil.png" class="mx-1 ">Mi
+                  perfil</a></li>
+              <li><a class="dropdown-item ml-5" id="CerrarSesion" href=""><img src="img/cerrar-sesion.png"
+                    class="mx-1">Cerrar sesion</a></li>
+            </ul>
       </div>
+      </li>
+      </ul>
+    </div>
     </div>
   </nav>
   <main>
-    <div class="container">
 
+    <div class="container">
+  
       <h2 class="mt-4 title-cart">CARRITO</h2>
 
       <div class="list-group-item">
@@ -57,205 +61,200 @@
           <div class="col-2 subtitulosCartProd">Eliminar</div>
         </div>
       </div>
-
     
       <div id="verObjetoCarrito"></div>
-      <div class="container-fluid">
 
-        <div class="row justify-content-between">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-4  py-2 r ">
+<!-- Formulario General -->
+      <form  class="row g-3 needs-validation" id="formularioCarrito" novalidate>
 
-            <h3 class="mt-5 subtitulosCart">Tipo de envio</h3>
-            <div class="mt-2 tipoDeEnvio" style="width: 100%;">
+<!--CONTAINER TIPO DE ENVIO-->
+        <div class="container">
+          <div class="row justify-content-between">
+            <div class="col-sm-12 col-md-6 col-lg-5 mt-1 pt-3 r ">
 
-              <div class="list-group-item containerPremium custom-control custom-radio py-3">
-                <input id="cartPremium" onclick="costoEnvioPremium()" name="publicationType" type="radio"
-                  class="custom-control-input" required="">
-                <label class="custom-control-label mt-1" for="cartPremium"> <span class="tituloPremium"> Premium</span>
-                  <span class="promocionText"> de 2 a 5 días (15%)</span></label>
+              <h3 class="mt-5 subtitulosCart">Tipo de envio</h3>
+              <div class="mt-2 tipoDeEnvio" style="width: 100%;">
+
+                <div class="list-group-item containerPremium custom-control custom-radio py-3">
+                  <input id="cartPremium" onclick="costoEnvioPremium()" name="publicationType" type="radio"
+                    class="custom-control-input form-check-input" required="">
+                  <label class="custom-control-label mt-1" for="cartPremium"> <span class="tituloPremium">
+                      Premium</span>
+                    <span class="promocionText"> de 2 a 5 días (15%)</span></label>
+                </div>
+
+                <div class="list-group-item custom-control containerExpress custom-radio py-3">
+                  <input id="cartExpress" onclick="costoEnvioExpress()" name="publicationType" type="radio"
+                    class="custom-control-input form-check-input" required="">
+                  <label class="custom-control-label my-1" for="cartExpress"><span class="tituloExpress"> Express</span>
+                    <span class="promocionText"> de 5 a 8 días (7%)</span></label>
+                </div>
+
+                <div class="list-group-item custom-control containerStandard custom-radio py-3">
+                  <input id="cartStandard" onclick="costoEnvioStandard()" name="publicationType" type="radio"
+                    class="custom-control-input form-check-input" required="">
+                  <label class="custom-control-label mb-1" for="cartStandard"><span class="tituloStandard">
+                      Standard</span> <span class="promocionText"> de 12 a 15 días (5%)</span></label>
+                </div>
               </div>
-
-              <div class="list-group-item custom-control containerExpress custom-radio py-3">
-                <input id="cartExpress" onclick="costoEnvioExpress()" name="publicationType" type="radio"
-                  class="custom-control-input" required="">
-                <label class="custom-control-label my-1" for="cartExpress"><span class="tituloExpress"> Express</span>
-                  <span class="promocionText"> de 5 a 8 días (7%)</span></label>
-              </div>
-
-              <div class="list-group-item custom-control containerStandard custom-radio py-3">
-                <input id="cartStandard" onclick="costoEnvioStandard()" name="publicationType" type="radio"
-                  class="custom-control-input" required="">
-                <label class="custom-control-label mb-1" for="cartStandard"><span class="tituloStandard">
-                    Standard</span> <span class="promocionText"> de 12 a 15 días (5%)</span></label>
-              </div>
-            </div>
-
-
-          </div>
-
-          <div class="col-12 mt-5 col-sm-12 col-md-5 col-lg-4 ">
-            <div class=" mt-5 row justify-content-center totalCarrito">
-              <div class="col-12 mt-3">
-                <h2>Costos</h2>
-              </div>
-              <hr>
-              <div class="col-6"><strong> Subtotal</strong></div>
-              <div class="col-6" id="SubtotalGeneral">USD 0</div>
-              <hr>
-              <div class="col-6"><strong> Costo de envio</strong></div>
-              <div class="col-6" id="costoEnvio">USD 0</div>
-              <hr>
-              <div class="col-6"><strong class="subtitulosCart"> Total</strong></div>
-              <div class="col-6 mb-3" id="totalGeneral">USD 0</div>
 
             </div>
+            <div class="col-12 mt-5 col-sm-12 col-md-6 col-lg-5 py-2">
+              <div class=" mt-5 row justify-content-center totalCarrito">
+                <div class="col-12 mt-3">
+                  <h2>Costos</h2>
+                </div>
+                <hr>
+                  <div class="col-6 pb-2"><strong id="sub"> Subtotal</strong></div>
+                  <div class="col-6" id="SubtotalGeneral">USD 0</div>
+                <hr>
+                  <div class="col-6 pb-2"><strong id="cos"> Costo de envio</strong></div>
+                  <div class="col-6" id="costoEnvio">USD 0</div>
+                <hr>
+                  <div class="col-6"><strong class="subtitulosCart" id="tot"> Total</strong></div>
+                  <div class="col-6 pb-2" id="totalGeneral">USD 0</div>
+
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-
-
-
-    
-    <form method="get" class="row g-3 needs-validation" id="formularioCarrito" novalidate>
-      <h3 class="my-5 subtitulosCart">Direccion de envio</h3>
-      <div class="col-md-4">
-        <label for="validationCustom01" class="form-label">Calle</label>
-        <input type="text" class="form-control" id="validationCustom01" value="" required>
-        <div class="invalid-feedback">
-          Ingrese una calle
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="validationCustom02" class="form-label">Numero</label>
-        <input type="number" class="form-control" id="validationCustom02" value="" required>
-        <div class="invalid-feedback">
-          Ingrese un número
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <label for="validationCustom03" class="form-label">Esquina</label>
-        <input type="text" class="form-control" id="validationCustom03" required>
-        <div class="invalid-feedback">
-          Ingrese una esquina
-        </div>
-      </div>
-
-
-
-
-   <h3>Forma de pago</h3>
-   <div class="row">
-
-      <div class="col-6 col-sm-4 col-md-3" id="metodoSeleccionado">No ha seleccionado</div>
-      <div class="col-6 col-sm-3 col-md-2  col-lg-2" ><a id="metodoDePago" href="#exampleModal" data-bs-toggle="modal" title="modal">Seleccionar</a></div>
-    
-  </div>
-
-      <div class="col-12">
-        <div class="form-check">
-          <input class="form-check-input" type="text"style="width= 50%"  value="" id="invalidCheck" required>
-
-          <div class="invalid-feedback" >
-            Debe seleccionar una forma de pago.
+<!--------------------------->
+        <h3 class="my-5 subtitulosCart">Direccion de envio</h3>
+        <div class="col-md-4">
+          <label for="validationCustom01" class="form-label">Calle</label>
+          <input type="text" class="form-control" id="validationCustom01" value="" required="">
+          <div class="invalid-feedback">
+            Ingrese una calle
           </div>
         </div>
-      </div>
+        <div class="col-md-4">
+          <label for="validationCustom02" class="form-label">Numero</label>
+          <input type="number" class="form-control" id="validationCustom02" value="" required="">
+          <div class="invalid-feedback">
+            Ingrese un número
+          </div>
+        </div>
 
+        <div class="col-md-6">
+          <label for="validationCustom03" class="form-label">Esquina</label>
+          <input type="text" class="form-control" id="validationCustom03" required="">
+          <div class="invalid-feedback">
+            Ingrese una esquina
+          </div>
+        </div>
 
+        <h3>Forma de pago</h3>
+        <div class="row">
 
-
-
-
-      <div class="col-12">
-        <button class="btn btn-primary col-12 mt-2" id="botonCompra" type="submit">Finalizar compra</button>
+          <div class="col-6 col-sm-4 col-md-3" id="metodoSeleccionado">No ha seleccionado</div>
+          <div class="col-6 col-sm-3 col-md-2  col-lg-2">
+            <a id="metodoDePago" href="#modal-metodoDePago" data-bs-toggle="modal" title="modal">Seleccionar</a>
+          </div>
+        </div>
         
-      </div>
+        <div class="col-12">
+          <p id="alertaFormaDePago"></p>
+          <p id="alertaCantidadProducto"></p>
+        </div>
 
-    </form>
+        <div class="col-12">
+          <button class="btn btn-primary col-12 mt-2" id="botonCompra" type="submit">Finalizar compra</button>
+        </div>
+      </form>
 
 
-    
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Forma de pago</h1>
+      <!-- Modal forma de pago -->
+      <div class="modal fade" id="modal-metodoDePago" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Forma de pago</h1>
 
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-            <div class="container-fluid">
+              <form id="modalForm" class="needs-validation" novalidate>
 
-              <div class="credito custom-radio ">
-                <input id="tarjetaCredito" name="tarjeta" type="radio" class="credito-input">
-                <label class="credito-label my-1" for="tarjetaCredito">
-                  <span class="promocionText"> Tarjeta de credito</span></label>
-              </div>
+                <div class="container-fluid">
 
-              <hr>
+                  <label for="tarjetaCredito" class="form-label">
+                    <div class="credito custom-radio ">
+                      <input id="tarjetaCredito" name="tarjeta" type="radio" class="credito-input">
+                      <label class="credito-label my-1" for="tarjetaCredito">
+                        <span class="promocionText"> Tarjeta de credito</span></label>
+                  </label>
 
-              <div class="row">
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="col-12">Número de tarjeta</div>
+                      <div class="col-12"><input id="numeroTarjeta" type="number" min="0" class="rounded py-1"
+                          style="width: 100%;" required></div>
+                      <div class="invalid-feedback">
+                        Campo obligatorio
+                      </div>
+                    </div>
+                  </div>
 
-                <div class="col-6">
-                  <div class="row">
-                    <div class="col-12">Número de tarjeta</div>
-                    <div class="col-12"><input id="numeroTarjeta" type="number" min="0" class="rounded py-1"
-                        style="width: 100%;"> </div>
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="col-12">Código de Seg.</div>
+                      <div class="col-12"><input id="codigoSeg" type="number" min="0" style="width: 60%;"
+                          class="rounded py-1" required></div>
+                    </div>
+                    <div class="invalid-feedback">
+                      Campo obligatorio
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row py-3">
+                  <div class="col-6">
+                    <div class="col-12">Vencimiento (MM/AA)</div>
+                    <div class="col-12"><input id="tarjetaVencimiento" type="date" min="0" class="rounded py-1"
+                        style="width: 100%;" required></div>
+                    <div class="invalid-feedback">
+                      Campo obligatorio
+                    </div>
                   </div>
                 </div>
+                <label for="credito-label" class="form-label">
+                <div class="credito custom-radio pt-4">
+                  <input id="transferenciaBancaria" name="tarjeta" type="radio" class="credito-input">
+                  <label class="credito-label my-1" for="transferenciaBancaria">
+                    <span class="promocionText">Transferencia Bancaria</span></label>
+                </div></label>
+
+                <hr>
 
 
-                <div class="col-6">
-                  <div class="row">
-                    <div class="col-12">Código de Seg.</div>
-                    <div class="col-12"><input id="codigoSeg" type="number" min="0" style="width: 60%;"
-                        class="rounded py-1"></div>
+                <div class="row pb-3">
+                  <div class="col-6">
+                    <div class="col-12">Numero de cuenta</div>
+                    <div class="col-12"><input id="numCuenta" type="number" min="0" class="rounded py-1"
+                        style="width: 100%;" required></div>
+                    <div class="invalid-feedback">
+                      Campo obligatorio
+                    </div>
                   </div>
                 </div>
-
-              </div>
-
-              <div class="row py-3">
-                <div class="col-6">
-                  <div class="col-12">Vencimiento (MM/AA)</div>
-                  <div class="col-12"><input id="tarjetaVencimiento" type="date" min="0" class="rounded py-1"
-                      style="width: 100%;"></div>
-                </div>
-              </div>
-
-              <div class="credito custom-radio pt-4">
-                <input id="transferenciaBancaria" name="tarjeta" type="radio" class="credito-input">
-                <label class="credito-label my-1" for="transferenciaBancaria">
-                  <span class="promocionText">Transferencia Bancaria</span></label>
-              </div>
-              <hr>
-
-
-              <div class="row pb-3">
-                <div class="col-6">
-                  <div class="col-12">Numero de cuenta</div>
-                  <div class="col-12"><input id="numCuenta" type="number" min="0" class="rounded py-1"
-                      style="width: 100%;"></div>
-                </div>
-              </div>
 
             </div>
-
+            </form>
           </div>
 
           <div class="modal-footer">
-            <button onclick="mostrarMetodoDePago()" type="button" class="btn btn-primary"
-              data-bs-dismiss="modal">Cerrar</button>
+            <button onclick="mostrarMetodoDePago()" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+              id="cerrarModalCart">Cerrar</button>
           </div>
         </div>
       </div>
     </div>
-
-
 
 
   </main>
@@ -269,6 +268,12 @@
       <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
+
+  <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+    <p>!Has comprado con Exito!</p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
