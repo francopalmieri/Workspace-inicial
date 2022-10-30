@@ -70,6 +70,7 @@ function agregarAlCarrito(id) {
 		localStorage.setItem('objetosEnCarrito', JSON.stringify(objetosEnCarrito))
 
 	}
+	AvisarProdCart()
 }
 
 function showInfoProductsPage() {
@@ -88,7 +89,8 @@ function showInfoProductsPage() {
             <h5><b>Cantidad de vendidos</b><h5>
             <p class="text-muted">${valor.soldCount}</p>
             <div class="col-12 mb-3">
-            <a class="btn btn-primary mt-3" onclick="agregarAlCarrito(${valor.id})">Agregar al carrito</a>
+            <a class="btn btn-primary mt-3" onclick="agregarAlCarrito(${valor.id})" id="productoEnviado">Agregar al carrito</a>
+			<a class="btn btn-primary mt-3">Comprar</a>
             </div> 
 			</div>
             ` //creo la estructura de lo que voy a mostar en pantalla pasandole los parametros proporcionados por el json del mismo
@@ -130,7 +132,13 @@ function showCarrousel() {
 }
 
 
-
+function AvisarProdCart(){
+	document.getElementById('alert-success').classList.add('show');
+setTimeout(()=>{
+	document.getElementById("alert-success").classList.remove("show");
+  },1000);
+}
+	
 
 function similarProducts() {
 	let valor = infoProductsArray;
@@ -251,4 +259,5 @@ console.log(infoProductsArray)
 		}
 	})
 });
+
 

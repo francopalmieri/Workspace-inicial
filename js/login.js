@@ -60,3 +60,22 @@ function moverCampoEmail() {
 function moverCampoPassword() {
 	document.getElementById('campo-password').id="moverPasswordAlert"
 }
+
+
+// Import the functions you need from the SDKs you need
+
+
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAjrlvUJ9UwYmqQOV1TsRT8i0Ai5kdfOME",
+  authDomain: "ecommerce-jap-ee39b.firebaseapp.com",
+  projectId: "ecommerce-jap-ee39b",
+  storageBucket: "ecommerce-jap-ee39b.appspot.com",
+  messagingSenderId: "574183204313",
+  appId: "1:574183204313:web:354fddb5974df20b2ea5c8"
+};
+
