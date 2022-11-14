@@ -6,12 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link rel="icon" href="img/faviconCeleste.svg" type="image/png" />
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="carritoBody">
   <nav class="navbar navbar-expand-lg navbar-light bg-light p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -20,6 +21,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><img src="https://jovenesaprogramar.edu.uy/storage/app/media/logo-jap-2022.svg" alt="" style="width: 120%;"></a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
@@ -35,7 +39,7 @@
             <ul class="dropdown-menu ">
               <li><a class="dropdown-item mr-3" href="my-profile.html"><img src="img/perfil.png" class="mx-1 ">Mi
                   perfil</a></li>
-              <li><a class="dropdown-item ml-5" id="CerrarSesion" href=""><img src="img/cerrar-sesion.png"
+              <li><a class="dropdown-item ml-5" id="CerrarSesion"><img src="img/cerrar-sesion.png"
                     class="mx-1">Cerrar sesion</a></li>
             </ul>
       </div>
@@ -44,13 +48,13 @@
     </div>
     </div>
   </nav>
-  <main>
+  <main class="carritoMain">
 
     <div class="container">
-  
-      <h2 class="mt-4 title-cart">CARRITO</h2>
 
-      <div class="list-group-item">
+      <h2 class="mt-4  title-cart ">CARRITO</h2>
+
+      <div class="list-group-item" id="fondoBarra-product">
         <div class="row py-3 barra-product justify-content-around">
 
           <div class="col-2 subtitulosCartProd">Imágen</div>
@@ -61,24 +65,24 @@
           <div class="col-2 subtitulosCartProd">Eliminar</div>
         </div>
       </div>
-    
+
       <div id="verObjetoCarrito"></div>
 
-<!-- Formulario General -->
-      <form  class="row g-3 needs-validation" id="formularioCarrito" novalidate>
+      <!-- Formulario General -->
+      <form class="row g-3 needs-validation" id="formularioCarrito" novalidate>
 
-<!--CONTAINER TIPO DE ENVIO-->
+        <!--CONTAINER TIPO DE ENVIO-->
         <div class="container">
           <div class="row justify-content-between">
             <div class="col-sm-12 col-md-6 col-lg-5 mt-1 pt-3 r ">
 
               <h3 class="mt-5 subtitulosCart">Tipo de envio</h3>
-              <div class="mt-2 tipoDeEnvio" style="width: 100%;">
+              <div class="my-2 tipoDeEnvio" style="width: 100%;">
 
                 <div class="list-group-item containerPremium custom-control custom-radio py-3">
                   <input id="cartPremium" onclick="costoEnvioPremium()" name="publicationType" type="radio"
                     class="custom-control-input form-check-input" required="">
-                  <label class="custom-control-label mt-1" for="cartPremium"> <span class="tituloPremium">
+                  <label class="custom-control-label mx-3" for="cartPremium"> <span id="tituloPremium">
                       Premium</span>
                     <span class="promocionText"> de 2 a 5 días (15%)</span></label>
                 </div>
@@ -86,14 +90,14 @@
                 <div class="list-group-item custom-control containerExpress custom-radio py-3">
                   <input id="cartExpress" onclick="costoEnvioExpress()" name="publicationType" type="radio"
                     class="custom-control-input form-check-input" required="">
-                  <label class="custom-control-label my-1" for="cartExpress"><span class="tituloExpress"> Express</span>
+                  <label class="custom-control-label mx-3" for="cartExpress"><span id="tituloExpress"> Express</span>
                     <span class="promocionText"> de 5 a 8 días (7%)</span></label>
                 </div>
 
                 <div class="list-group-item custom-control containerStandard custom-radio py-3">
                   <input id="cartStandard" onclick="costoEnvioStandard()" name="publicationType" type="radio"
                     class="custom-control-input form-check-input" required="">
-                  <label class="custom-control-label mb-1" for="cartStandard"><span class="tituloStandard">
+                  <label class="custom-control-label mx-3" for="cartStandard"><span id="tituloStandard">
                       Standard</span> <span class="promocionText"> de 12 a 15 días (5%)</span></label>
                 </div>
               </div>
@@ -105,20 +109,20 @@
                   <h2>Costos</h2>
                 </div>
                 <hr>
-                  <div class="col-6 pb-2"><strong id="sub"> Subtotal</strong></div>
-                  <div class="col-6" id="SubtotalGeneral">USD 0</div>
+                <div class="col-6 pb-2"><strong id="sub"> Subtotal</strong></div>
+                <div class="col-6" id="SubtotalGeneral">USD 0</div>
                 <hr>
-                  <div class="col-6 pb-2"><strong id="cos"> Costo de envio</strong></div>
-                  <div class="col-6" id="costoEnvio">USD 0</div>
+                <div class="col-6 pb-2"><strong id="cos"> Costo de envio</strong></div>
+                <div class="col-6" id="costoEnvio">USD 0</div>
                 <hr>
-                  <div class="col-6"><strong class="subtitulosCart" id="tot"> Total</strong></div>
-                  <div class="col-6 pb-2" id="totalGeneral">USD 0</div>
+                <div class="col-6"><strong class="totalGeneral" id="tot"> Total</strong></div>
+                <div class="col-6 pb-2" id="totalGeneral"><s>USD 0</s> </div>
 
               </div>
             </div>
           </div>
         </div>
-<!--------------------------->
+        <!--------------------------->
         <h3 class="my-5 subtitulosCart">Direccion de envio</h3>
         <div class="col-md-4">
           <label for="validationCustom01" class="form-label">Calle</label>
@@ -148,17 +152,17 @@
 
           <div class="col-6 col-sm-4 col-md-3" id="metodoSeleccionado">No ha seleccionado</div>
           <div class="col-6 col-sm-3 col-md-2  col-lg-2">
-            <a id="metodoDePago" href="#modal-metodoDePago" data-bs-toggle="modal" title="modal">Seleccionar</a>
+            <a class="btn btn-dark" id="metodoDePago" href="#modal-metodoDePago" data-bs-toggle="modal" title="modal">Seleccionar</a>
           </div>
         </div>
-        
+
         <div class="col-12">
           <p id="alertaFormaDePago"></p>
           <p id="alertaCantidadProducto"></p>
         </div>
 
-        <div class="col-12">
-          <button class="btn btn-primary col-12 mt-2" id="botonCompra" type="submit">Finalizar compra</button>
+        <div class="col-12 col-md-6 col-lg-3">
+          <button class="btn btn-primary col-12 mt-2" id="botonCompra" type="submit">Pagar</button>
         </div>
       </form>
 
@@ -216,7 +220,7 @@
                 <div class="row py-3">
                   <div class="col-6">
                     <div class="col-12">Vencimiento (MM/AA)</div>
-                    <div class="col-12"><input id="tarjetaVencimiento" type="datetime" min="0" class="rounded py-1"
+                    <div class="col-12"><input id="tarjetaVencimiento" type="date" min="0" class="rounded py-1"
                         style="width: 100%;" required></div>
                     <div class="invalid-feedback">
                       Campo obligatorio
@@ -224,11 +228,12 @@
                   </div>
                 </div>
                 <label for="credito-label" class="form-label">
-                <div class="credito custom-radio pt-4">
-                  <input id="transferenciaBancaria" name="tarjeta" type="radio" class="credito-input">
-                  <label class="credito-label my-1" for="transferenciaBancaria">
-                    <span class="promocionText">Transferencia Bancaria</span></label>
-                </div></label>
+                  <div class="credito custom-radio pt-4">
+                    <input id="transferenciaBancaria" name="tarjeta" type="radio" class="credito-input">
+                    <label class="credito-label my-1" for="transferenciaBancaria">
+                      <span class="promocionText">Transferencia Bancaria</span></label>
+                  </div>
+                </label>
 
                 <hr>
 
@@ -258,23 +263,23 @@
 
 
   </main>
-  <footer class="text-muted">
+  <footer class="text-muted ">
     <div class="container">
       <p class="float-end">
         <a href="#">Volver arriba</a>
       </p>
 
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
+      <p class="negro">Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
         2022</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+      <p class="negro">Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
     </div>
   </footer>
-<!--ALERTA EXITO COMPRA-->
+  <!--ALERTA EXITO COMPRA-->
   <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
-    <p>!Has comprado con Exito!</p>
+    <p class="negro">!Has comprado con Exito!</p>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-<!------------>
+  <!------------>
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
