@@ -22,6 +22,28 @@ if (segundoComments < 10) segundoComments = '0' + segundoComments;
 MyDateString = anioComments + '-' + mesComments + '-' + diaComments + ' ' + horaComments + ':' + minutoComments + ':' + segundoComments;
 
 
+
+function convertir(numero) {
+	//se convierte el numero a cadena con +"" en numero 
+	numero = numero + "";
+	//convertimos la cadena en un array de caracteres con split("")
+	//e invertimos el array con reverse() poniendo todo en un nuevo array del numero       
+	var numeroArray = numero.split("").reverse();
+	//en la cadena vacia nuevoNumero se pondra el nuevo numero convertido
+	var nuevoNumero = "";
+
+	//con esto recorremos el array (numeroArray.length = tamaño del numero)
+	for (i = 0; i < numeroArray.length; i++) {
+		//cada vez que el indice sea multiplo de 3 distinto de 0 agregamos un punto
+		if (i % 3 == 0 && i != 0)
+			nuevoNumero = "." + nuevoNumero;
+		//concatenamos cada elemento a la cadena nuevoNumero para formar el nuevo numero
+		nuevoNumero = numeroArray[i] + nuevoNumero;
+	}
+	//enviar el nuevo numero
+	return nuevoNumero;
+}
+
 function setProductRelatedID(id) {
 	localStorage.setItem("productID", id);//funcion que toma la id de productos relacionados como parametro y envia al localstorage
 	window.location = "product-info.html";//finalmente redirecciona a product-info para que se muestre ese producto especifico
@@ -32,45 +54,53 @@ function agregarAlCarrito(id) {
 	//funcion que toma como parametro la id del producto
 	// traigo la variable global para los valores de ese producto
 	let datosCarrito = infoProductsArray;
-	//si el almacenamiento local esta no existe entonces le paso un array como string
-	if (localStorage.getItem('objetosEnCarrito') == null) {
-		localStorage.setItem('objetosEnCarrito', '[]');
-	}
-	//lo traigo a una variable
-	let objetosEnCarrito = JSON.parse(localStorage.getItem('objetosEnCarrito'));
+	
+	
+	let usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+	let usuariosEnLocal = JSON.parse(localStorage.getItem('usuarios'));
 
-	//en ese array utilizo el metodo some el cual retorna verdadero si algun elemento cumple con la condicion establecida
-	let estaRepetido = objetosEnCarrito.some(producto => producto.id === id)
+	for (usuario of usuariosEnLocal) {
+		if (usuario.nombreUsuario === usuarioActivo) {
 
-	//si en el almacenamiento existe un elemento que contenga la id del producto que quiero agregar
-	//entonces itero el array de objetos y el que tenga esa id le sumo la cantidad
-	//en caso de no encontrarse ese elemento, transformo sus propiedades en un objeto
-	//lo agrego a la lista y lo mando al almacenamiento
-	if (estaRepetido) {
+			if (usuario.enCarrito == "" )  { usuario.enCarrito = [] };
+				
+			
+			//en ese array utilizo el metodo some el cual retorna verdadero si algun elemento cumple con la condicion establecida
 
-		for (let i = 0; i < objetosEnCarrito.length; i++) {
-			let dato = objetosEnCarrito[i];
-			if (id === dato.id) {
-				dato.cantidad++;
-				localStorage.setItem('objetosEnCarrito', JSON.stringify(objetosEnCarrito));
+			let estaRepetido = usuario.enCarrito.some(producto => producto.id === id)
+			//si en el almacenamiento existe un elemento que contenga la id del producto que quiero agregar
+			//entonces itero el array de objetos y el que tenga esa id le sumo la cantidad
+			//en caso de no encontrarse ese elemento, transformo sus propiedades en un objeto
+			//lo agrego a la lista y lo mando al almacenamiento
+			if (estaRepetido) {
+
+				for (let i = 0; i < usuario.enCarrito.length; i++) {
+					let dato = usuario.enCarrito[i];
+					if (id === dato.id) {
+						dato.cantidad++;
+
+						localStorage.setItem('usuarios', JSON.stringify(usuariosEnLocal));
+					}
+				}
+			} else {
+
+				let elementoEnCarrito = {
+					"id": datosCarrito.id,
+					"name": datosCarrito.name,
+					"cost": datosCarrito.cost,
+					"image": datosCarrito.images[0],
+					"currency": datosCarrito.currency,
+					"cantidad": 1,
+				}
+
+				usuario.enCarrito.push(elementoEnCarrito)
+				localStorage.setItem('usuarios', JSON.stringify(usuariosEnLocal))
+
 			}
-		}
-	} else {
+			AvisarProdCart();
 
-		let elementoEnCarrito = {
-			"id": datosCarrito.id,
-			"name": datosCarrito.name,
-			"cost": datosCarrito.cost,
-			"image": datosCarrito.images[0],
-			"currency": datosCarrito.currency,
-			"cantidad": 1,
 		}
-		
-		objetosEnCarrito.push(elementoEnCarrito)
-		localStorage.setItem('objetosEnCarrito', JSON.stringify(objetosEnCarrito))
-
 	}
-	AvisarProdCart()
 }
 
 function showInfoProductsPage() {
@@ -80,17 +110,16 @@ function showInfoProductsPage() {
     <div class="justify-content-around">    
             <h1 class="mt-4 mb-2 text-center  tituloInfo">${valor.name}</h1>
             <hr>
-            <h5><b>Precio</b><h5>
-             <p class="text-muted">${valor.currency} ${valor.cost} <img src="/img/etiqueta-de-ropa.png" alt=""></p>
-			 <h5><b>Descripcion</b><h5>
+            <h5><b class="subtitulosProdInfo">Precio</b><h5>
+             <p class="text-muted">${valor.currency} ${convertir(valor.cost)}</p>
+			 <h5><b class="subtitulosProdInfo">Descripcion</b><h5>
             <p class="text-muted">${valor.description}</p>
-            <h5><b>Categoria</b><h5>
+            <h5><b class="subtitulosProdInfo">Categoria</b><h5>
             <p class="text-muted">${valor.category}</p>
-            <h5><b>Cantidad de vendidos</b><h5>
+            <h5><b class="subtitulosProdInfo">Cantidad de vendidos</b><h5>
             <p class="text-muted">${valor.soldCount}</p>
             <div class="col-12 mb-3">
-            <a class="btn btn-primary mt-3" onclick="agregarAlCarrito(${valor.id})" id="productoEnviado">Agregar al carrito</a>
-			<a class="btn btn-primary mt-3">Comprar</a>
+            <a class="btn btn-primary mt-3" onclick="agregarAlCarrito(${valor.id})" id="productoEnviado">Añadir al carrito</a>
             </div> 
 			</div>
             ` //creo la estructura de lo que voy a mostar en pantalla pasandole los parametros proporcionados por el json del mismo
@@ -124,21 +153,20 @@ function showCarrousel() {
 		}
 	}
 	//Estilo en imagen 
-	
+
 
 	document.getElementById('btnMainCarrousel').innerHTML = btnMainCarrousel;
 	document.getElementById('carruselImagenes').innerHTML = carrouselImg;
-    
+
 }
 
-
-function AvisarProdCart(){
+function AvisarProdCart() {
 	document.getElementById('alert-success').classList.add('show');
-setTimeout(()=>{
-	document.getElementById("alert-success").classList.remove("show");
-  },1000);
+	setTimeout(() => {
+		document.getElementById("alert-success").classList.remove("show");
+		location.reload();
+	}, 1000);
 }
-	
 
 function similarProducts() {
 	let valor = infoProductsArray;
@@ -149,7 +177,7 @@ function similarProducts() {
 
 		similarProducts += ` <div onclick="setProductRelatedID(${product.id})" class="col-12 col-sm-6 12 col-md-4 mt-4 cursor-active similarProducts"> 
                                 <img src="${product.image}" class="img-thumbnail"></img>
-                                <div class="text-center">${product.name}</div>
+                                <div class="text-center subtitulosProdInfo">${product.name}</div>
                             </div>`
 	});
 	document.getElementById('productRelated').innerHTML = similarProducts; //imprimo en pantalla
@@ -174,27 +202,46 @@ function showComments() {
 		comments.score = calificacion; //sobrescribo la variable en el score.
 
 		htmlComments += `
-                <div class="commentProd my-3 col-sm-12 list-group-item">
+                <div class="commentProd my-3 col-12 list-group-item comentarios">
                     <p><b>${comments.user}</b> - ${comments.dateTime} - ${comments.score}</p>
                     <p>${comments.description}</p></div> `
 	} //creo la estructura de los comentarios que se va a reflejar en mi html pasandole los valores del json por parametro
 
 	document.getElementById("info-comments").innerHTML = htmlComments;
 
-	if (localStorage.getItem('addComment')) { //dado el almacenamiento local de los comentarios. 
 
-		let comentarios = JSON.parse(localStorage.getItem('addComment')); //traigo como objeto lo que tengo alli y lo almaceno en una variable
+	
+	let usuarioGeneral = JSON.parse(localStorage.getItem('usuarios'));
+	let usuarioEnActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+  
+	for (usuario of usuarioGeneral) {
+	  if (usuario.nombreUsuario === usuarioEnActivo) {
 
-		for (let comentario of comentarios) { //para cada uno de los elementos de esa lista de comentarios.
-			if (comentario.includes(JSON.parse(localStorage.getItem('productID')))) { //si ese comentario incluye la id del producto en el que estoy
+	if (usuario.comentariosCarrito!=undefined) { //dado el almacenamiento local de los comentarios. 
+
+		for (let comentario of usuario.comentariosCarrito) { //para cada uno de los elementos de esa lista de comentarios.
 				document.getElementById("info-comments").innerHTML += comentario; //entonces lo muestro en mi pagina
-			}
 		}
 	}
+	}
+}
 }
 //evento de escucha para el boton de commentario
 
 document.getElementById('botonComment').addEventListener('click', () => {
+
+
+
+let usuarioGeneral = JSON.parse(localStorage.getItem('usuarios'));
+  let usuarioEnActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+
+  for (usuario of usuarioGeneral) {
+    if (usuario.nombreUsuario === usuarioEnActivo) {
+
+	if (usuario.comentariosCarrito == "" || usuario.comentariosCarrito == undefined){
+		usuario.comentariosCarrito = [];
+		localStorage.setItem('usuarios', JSON.stringify(usuarioGeneral));
+	}
 	//traigo los valores de los campos a tener en cuenta
 	let textArea = document.getElementById('textArea1').value;
 	let ratingComment = document.getElementById('rating').value;
@@ -202,41 +249,41 @@ document.getElementById('botonComment').addEventListener('click', () => {
 
 	let addRating = "";
 
-
 	//utilizo mismo formato para agregar estrellas que en el utilizado para llamar al json
 	for (let i = 0; i < 5; i++) {
-		if (i < ratingComment) { addRating += `<span class="fa fa-star checked"></span>`; } else { addRating += `<span class="fa fa-star"></span>`; }
+		if (i < ratingComment) {
+			addRating += `<span class="fa fa-star checked"></span>`;
+		}
+		else { addRating += `<span class="fa fa-star"></span>`; }
 	}
 
 	let agregarComment = "";
 	agregarComment += `
     <div class="my-3 col-sm-12 list-group-item addComment">
     <div id="${valorcomment.id}"></div>
-        <p><b>${localStorage.getItem('usuario')}</b> - ${MyDateString} - ${addRating}</p>
+        <p><b>${usuario.nombreUsuario }</b> - ${MyDateString} - ${addRating}</p>
         <p>${textArea}</p></div> `
 
 
 	//al comentario que realiza el usuario se le agrega la misma id proporcionada por el producto
 	//concateno la fecha actual, la puntuacion y el texto
-	let array = [];
+	
 
-	//si no hay nada en este almacenamiento local introduzco un array vacio
-	if (localStorage.getItem('addComment') == null) {
-		localStorage.setItem('addComment', JSON.stringify(array));
-	}
+
 
 	//almaceno ese array como objeto en una variable
 	//mediante push agrego el comentario a mi array
 	//vuelvo a enviar al almacenamiento local como string
 	//agrego el comentario al espacio donde se encuentran los demas
 	//recargo la pagina para que se me actualice la fecha de mi comentario y no me muestre la misma.
-	let lista = JSON.parse(localStorage.getItem('addComment'));
+	
 
-	lista.push(agregarComment);
-	localStorage.setItem('addComment', JSON.stringify(lista))
+	usuario.comentariosCarrito.push(agregarComment);
+	localStorage.setItem('usuarios', JSON.stringify(usuarioGeneral))
 	document.getElementById("info-comments").innerHTML += agregarComment;
-
-	window.location.reload()
+}
+}
+window.location.reload()
 })
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -244,15 +291,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
 		if (resultObj.status === "ok") {
 			infoProductsArray = resultObj.data
-console.log(infoProductsArray)
 			getJSONData(PRODUCT_COMMENTS_URL).then(function (resultObj) {
 				if (resultObj.status === "ok") {
 					infoCommentsArray = resultObj.data
 					showInfoProductsPage();
 					showCarrousel()
-                    showComments()
-                    similarProducts()
-					
+					showComments()
+					similarProducts()
+
 				}
 			})
 

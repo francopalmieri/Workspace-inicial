@@ -7,6 +7,28 @@ let minCount = undefined;
 let maxCount = undefined;
 let buscadorF = undefined;
 
+function convertir(numero){ 
+    //se convierte el numero a cadena con +"" en numero 
+    numero = numero+"";
+    //convertimos la cadena en un array de caracteres con split("")
+    //e invertimos el array con reverse() poniendo todo en un nuevo array del numero       
+    var numeroArray=numero.split("").reverse();
+    //en la cadena vacia nuevoNumero se pondra el nuevo numero convertido
+    var nuevoNumero="";
+ 
+    //con esto recorremos el array (numeroArray.length = tamaño del numero)
+    for(i=0;i<numeroArray.length;i++){
+        //cada vez que el indice sea multiplo de 3 distinto de 0 agregamos un punto
+        if( i%3 == 0 && i != 0)
+            nuevoNumero="."+nuevoNumero;
+        //concatenamos cada elemento a la cadena nuevoNumero para formar el nuevo numero
+        nuevoNumero=numeroArray[i]+nuevoNumero;
+    }
+    //enviar el nuevo numero
+    return nuevoNumero;
+ }
+
+
 function sortProducts(criterio, array) {
     let result = [];
 
@@ -44,7 +66,7 @@ function showCart(id){
 
 function showProductsList() {
 
-    let titulo = `<div class="text-center p-4">
+    let titulo = `<div class="text-center p-4 tituloPaginaProducto ">
     <h2>Productos</h2>
     <p class="lead">Veras aquí todos los productos de la categoria <b>${currentElementsArray.catName}</b></p>
   </div>`
@@ -69,11 +91,11 @@ function showProductsList() {
                         <h5 class=" py-2" id="products-name">${categoryP.name}</h5>
                         <div class="col">
                             <div class="d-flex justify-content-between">
-                                <h4 class="mb-3 mx-3">${categoryP.currency} ${categoryP.cost}</h4>
+                                <h4 class="mb-3 mx-3">${categoryP.currency} ${convertir(categoryP.cost)}</h4>
                                 <small class="text-muted mx-2">${categoryP.soldCount} artículos</small>    
                             </div> 
                             
-                            <p class="mb-3 mx-2 text-muted"  >${categoryP.description}</p>
+                            <p class="mb-3 mx-2" id="prodDescription"  >${categoryP.description}</p>
                         </div>
                     </div>                    
                     </div>

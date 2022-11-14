@@ -2,7 +2,7 @@ const login = document.getElementById('inicio');//traigo los campos que voy a ut
 const email = document.getElementById('campo-email');
 const password = document.getElementById('campo-password');
 const contenedor = document.getElementsByTagName('label');
-
+let todosLosUsuarios=[];
 
 login.addEventListener('click', () => {
 	if (password.value == "" ||  email.value == ""){//Creo un condicional donde se va a cumplir tanto si el campo del email o la contraseña estan vacios
@@ -36,46 +36,49 @@ login.addEventListener('click', () => {
 	}
 
 	else {// si la condicion no se cumple entonces envio el dato del email al almacenamiento local y redirijo a la pagina principal
-		localStorage.setItem("usuario",email.value);
-		window.location.href= "index.html";
+		
+		
+		if(localStorage.getItem('usuarios')==null){
+		   localStorage.setItem('usuarios','[]');
+		}
+
+		let usuariosEnLocal = JSON.parse(localStorage.getItem('usuarios'))
+
+		let usuario = email.value
+
+		 usuario = {
+			"nombreUsuario": email.value,
+			"infoPerfil": "",
+            "enCarrito": "",
+			
+
+		}
+
+          if(usuariosEnLocal.some(usuario=>usuario.nombreUsuario === email.value)){
+			localStorage.setItem("usuarioActivo",JSON.stringify(email.value))
+			window.location.href= "index.html";
+		  }else{
+
+			usuariosEnLocal.push(usuario)
+			localStorage.setItem("usuarioActivo",JSON.stringify(email.value))
+			localStorage.setItem("usuarios",JSON.stringify(usuariosEnLocal));
+            window.location.href= "index.html";
+		  }
+		
 	}
 });
-
-
-
-
-function onSignIn(googleUser){
-    let profile = googleUser.getBasicProfile();
-    let usuario = profile.getName();
-	console.log('hola')
-    localStorage.setItem("usuario", usuario);
-    window.location.href="index.html";       
-}
-
 
 
 function moverCampoEmail() {
 	document.getElementById('campo-email').id="moverEmailAlert"
 }
+
 function moverCampoPassword() {
 	document.getElementById('campo-password').id="moverPasswordAlert"
 }
 
 
-// Import the functions you need from the SDKs you need
 
 
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAjrlvUJ9UwYmqQOV1TsRT8i0Ai5kdfOME",
-  authDomain: "ecommerce-jap-ee39b.firebaseapp.com",
-  projectId: "ecommerce-jap-ee39b",
-  storageBucket: "ecommerce-jap-ee39b.appspot.com",
-  messagingSenderId: "574183204313",
-  appId: "1:574183204313:web:354fddb5974df20b2ea5c8"
-};
 

@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 });
 
-document.addEventListener('DOMContentLoaded',()=>{
-    if (localStorage.getItem('usuario')==null) {
-        window.location.href="login.html"
-    }
-})
+
+function peugeot() {
+        localStorage.setItem("productID", 50924); //envio al local el id del producto para ser utilizado posteriormente
+        window.location = "product-info.html"
+}
