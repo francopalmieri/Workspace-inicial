@@ -54,17 +54,17 @@ function agregarAlCarrito(id) {
 	//funcion que toma como parametro la id del producto
 	// traigo la variable global para los valores de ese producto
 	let datosCarrito = infoProductsArray;
-	
-	
+
+
 	let usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
 	let usuariosEnLocal = JSON.parse(localStorage.getItem('usuarios'));
 
 	for (usuario of usuariosEnLocal) {
 		if (usuario.nombreUsuario === usuarioActivo) {
 
-			if (usuario.enCarrito == "" )  { usuario.enCarrito = [] };
-				
-			
+			if (usuario.enCarrito == "") { usuario.enCarrito = [] };
+
+
 			//en ese array utilizo el metodo some el cual retorna verdadero si algun elemento cumple con la condicion establecida
 
 			let estaRepetido = usuario.enCarrito.some(producto => producto.id === id)
@@ -184,7 +184,7 @@ function similarProducts() {
 }
 
 function showComments() {
-
+	console.log('entro a showComments')
 	let commentsArray = infoCommentsArray;
 	let htmlComments = "";
 
@@ -210,80 +210,106 @@ function showComments() {
 	document.getElementById("info-comments").innerHTML = htmlComments;
 
 
-	
+
 	let usuarioGeneral = JSON.parse(localStorage.getItem('usuarios'));
 	let usuarioEnActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-  
+
+
+
+
 	for (usuario of usuarioGeneral) {
-	  if (usuario.nombreUsuario === usuarioEnActivo) {
+		if (usuario.nombreUsuario === usuarioEnActivo) {
 
-	if (usuario.comentariosCarrito!=undefined) { //dado el almacenamiento local de los comentarios. 
+			//para cada uno de los elementos de esa lista de comentarios.
+			//dado el almacenamiento local de los comentarios.
+			//muestro los que incluyan la id del producto en el que me encuentro
+			//entonces lo muestro en mi pagina
 
-		for (let comentario of usuario.comentariosCarrito) { //para cada uno de los elementos de esa lista de comentarios.
-				document.getElementById("info-comments").innerHTML += comentario; //entonces lo muestro en mi pagina
+		
+
+				for (let i = 0; i < usuario.comentariosCarrito.length; i++) {
+					let comentario = usuario.comentariosCarrito[i];
+
+					if (comentario.id == localStorage.getItem('productID')) {
+
+						let agregarComment = ""
+						agregarComment = `
+						<div class="my-3 col-sm-12 list-group-item addComment">
+							<p><b>${comentario.nombreUsuario}</b> - ${comentario.fechaActual} - ${comentario.calificacion}</p>
+							<p>${comentario.espacioDeTexto}</p></div> `
+
+
+						document.getElementById("info-comments").innerHTML += agregarComment;
+					}
+				}
+			
 		}
 	}
-	}
 }
-}
-//evento de escucha para el boton de commentario
+//evento de escucha para el boton de comentario.
 
 document.getElementById('botonComment').addEventListener('click', () => {
 
 
 
-let usuarioGeneral = JSON.parse(localStorage.getItem('usuarios'));
-  let usuarioEnActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
+	let usuarioGeneral = JSON.parse(localStorage.getItem('usuarios'));
+	let usuarioEnActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
 
-  for (usuario of usuarioGeneral) {
-    if (usuario.nombreUsuario === usuarioEnActivo) {
+	for (usuario of usuarioGeneral) {
+		if (usuario.nombreUsuario === usuarioEnActivo) {
 
-	if (usuario.comentariosCarrito == "" || usuario.comentariosCarrito == undefined){
-		usuario.comentariosCarrito = [];
-		localStorage.setItem('usuarios', JSON.stringify(usuarioGeneral));
-	}
-	//traigo los valores de los campos a tener en cuenta
-	let textArea = document.getElementById('textArea1').value;
-	let ratingComment = document.getElementById('rating').value;
-	let valorcomment = infoProductsArray;
+			if (usuario.comentariosCarrito == "" || usuario.comentariosCarrito == undefined) {
+				usuario.comentariosCarrito = [];
+				localStorage.setItem('usuarios', JSON.stringify(usuarioGeneral));
+			}
+			//traigo los valores de los campos a tener en cuenta
+			let textArea = document.getElementById('textArea1').value;
+			let ratingComment = document.getElementById('rating').value;
+			let valorcomment = infoProductsArray;
 
-	let addRating = "";
+			let addRating = "";
 
-	//utilizo mismo formato para agregar estrellas que en el utilizado para llamar al json
-	for (let i = 0; i < 5; i++) {
-		if (i < ratingComment) {
-			addRating += `<span class="fa fa-star checked"></span>`;
-		}
-		else { addRating += `<span class="fa fa-star"></span>`; }
-	}
+			//utilizo mismo formato para agregar estrellas que en el utilizado para llamar al json
+			for (let i = 0; i < 5; i++) {
+				if (i < ratingComment) {
+					addRating += `<span class="fa fa-star checked"></span>`;
+				}
+				else { addRating += `<span class="fa fa-star"></span>`; }
+			}
 
-	let agregarComment = "";
-	agregarComment += `
+			let agregarComment = "";
+
+			let agregarObjetoComment = {
+				"id": valorcomment.id,
+				"nombreUsuario": usuario.nombreUsuario,
+				"fechaActual": MyDateString,
+				"calificacion": addRating,
+				"espacioDeTexto": textArea
+
+			}
+			agregarComment += `
     <div class="my-3 col-sm-12 list-group-item addComment">
     <div id="${valorcomment.id}"></div>
-        <p><b>${usuario.nombreUsuario }</b> - ${MyDateString} - ${addRating}</p>
+        <p><b>${usuario.nombreUsuario}</b> - ${MyDateString} - ${addRating}</p>
         <p>${textArea}</p></div> `
 
 
-	//al comentario que realiza el usuario se le agrega la misma id proporcionada por el producto
-	//concateno la fecha actual, la puntuacion y el texto
-	
+			//al comentario que realiza el usuario se le agrega la misma id proporcionada por el producto
+			//concateno la fecha actual, la puntuacion y el texto
+
+			//almaceno ese array como objeto en una variable
+			//mediante push agrego el comentario a mi array
+			//vuelvo a enviar al almacenamiento local como string
+			//agrego el comentario al espacio donde se encuentran los demas
+			//recargo la pagina para que se me actualice la fecha de mi comentario y no me muestre la misma.
 
 
-
-	//almaceno ese array como objeto en una variable
-	//mediante push agrego el comentario a mi array
-	//vuelvo a enviar al almacenamiento local como string
-	//agrego el comentario al espacio donde se encuentran los demas
-	//recargo la pagina para que se me actualice la fecha de mi comentario y no me muestre la misma.
-	
-
-	usuario.comentariosCarrito.push(agregarComment);
-	localStorage.setItem('usuarios', JSON.stringify(usuarioGeneral))
-	document.getElementById("info-comments").innerHTML += agregarComment;
-}
-}
-window.location.reload()
+			usuario.comentariosCarrito.push(agregarObjetoComment);
+			localStorage.setItem('usuarios', JSON.stringify(usuarioGeneral))
+			document.getElementById("info-comments").innerHTML += agregarComment;
+		}
+	}
+	window.location.reload()
 })
 
 document.addEventListener("DOMContentLoaded", () => {

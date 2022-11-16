@@ -96,7 +96,7 @@ function mostrarCarritogeneral() {
 
                 <div class="col-3 mostrarPrecio" style="font-size:15px"> ${objeto.currency} ${convertir(precio)}</div>
 
-                <div class="col-1 cursor-active basura" onclick="eliminarProdCartGeneral(${objeto.id})"><img src="/img/basura.png"></div> 
+                <div class="col-1 cursor-active basura" onclick="eliminarProdCartGeneral(${objeto.id})"><img src="img/basura.png"></div> 
             </div> 
 
  `;

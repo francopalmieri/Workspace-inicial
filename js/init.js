@@ -1,11 +1,11 @@
 const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
-
 const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
 const PRODUCT_LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + EXT_TYPE;
 const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/" + localStorage.getItem("productID") + EXT_TYPE;
 const PRODUCT_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/" + localStorage.getItem("productID") + EXT_TYPE;
+
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_INFO_PEUGEOUT = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
