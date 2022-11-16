@@ -60,9 +60,10 @@ function mostrarCarritogeneral() {
 
             if (usuario.enCarrito.length === 0) {
                 document.getElementById('contadorArticulos').style.display = 'none';
-
-                document.getElementById('titulocant').innerHTML = ""
-                document.getElementById('tituloprecio').innerHTML = ""
+                document.getElementById('CarritoDesplegable').innerHTML = "";
+                document.getElementById('titulocant').innerHTML = "";
+                document.getElementById('numArticulos').innerHTML= "";
+                document.getElementById('tituloprecio').innerHTML = "";
                 document.getElementById('finalizarCompra').disabled = true;
 
                 let carritoSinProductos = `
@@ -98,7 +99,7 @@ function mostrarCarritogeneral() {
 
                 <div class="col-1 cursor-active basura" onclick="eliminarProdCartGeneral(${objeto.id})"><img src="img/basura.png"></div> 
             </div> 
-
+            
  `;
 
                 document.getElementById('CarritoDesplegable').innerHTML = mostrarObjeto;
@@ -145,9 +146,7 @@ function eliminarProdCartGeneral(id) {//funcion que toma como parametro la id de
 
              mostrarCarritogeneral();
              
-            if (usuario.enCarrito.length === 0) {
-                location.reload()
-            }
+            
         }
     }
       
@@ -163,4 +162,5 @@ document.getElementById("finalizarCompra").addEventListener("click", function ()
 });
 
 
-
+ 
+//documentacion de la funcion convertir(numero) en stackoverFlow

@@ -225,7 +225,7 @@ function showComments() {
 			//muestro los que incluyan la id del producto en el que me encuentro
 			//entonces lo muestro en mi pagina
 
-		
+		if(usuario.comentariosCarrito.length>0){
 
 				for (let i = 0; i < usuario.comentariosCarrito.length; i++) {
 					let comentario = usuario.comentariosCarrito[i];
@@ -242,7 +242,7 @@ function showComments() {
 						document.getElementById("info-comments").innerHTML += agregarComment;
 					}
 				}
-			
+			}
 		}
 	}
 }
