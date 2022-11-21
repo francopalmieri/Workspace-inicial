@@ -50,6 +50,7 @@
       </div>
     </div>
   </nav>
+  <main>
   <div class="container">
     <div class="text-center p-4">
       <h2>Vender</h2>
@@ -182,64 +183,68 @@
           <button class="btn btn-primary btn-lg" type="submit">Vender</button>
         </form>
         <!-- carrito apartado individual  -->
-    <div class="offcanvas offcanvas-start justify-content-between" style="width: 30%; color: black;" tabindex="-1"
-    id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="container">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-        <div class="mx-1 row my-2 justify-content-between">
-          <div class=" ml-2 col-5 mt-3" id="numArticulos" style="font-size: 15px;"></div>
-
-          <div class="col-6 text-end ">
-            <div class="row justify-content-between">
-              <div id="titulocant" class="col-3 mt-3 p-0" style="font-size: 15px;"><b>CANT.</b></div>
-              <div id="tituloprecio" class="col-4 mt-3 p-0" style="font-size: 15px;"><b>PRECIO</b></div>
-              <div class="col-2 p-0 text-center"> <button type="button" class="btn-close" style="width: 5%;"
-                  data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="row">
+          <div class="col-auto">
+            <div class="offcanvas offcanvas-start justify-content-between" style="mask-border-width: 30%; color: black;" tabindex="-1"
+              id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+              <div class="container">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                  <div class="mx-1 row my-2 justify-content-between">
+                    <div class=" ml-2 col-5 mt-3" id="numArticulos" style="font-size: 15px;"></div>
+    
+                    <div class="col-6 text-end ">
+                      <div class="row justify-content-between">
+                        <div id="titulocant" class="col-3 mt-3 p-0" style="font-size: 15px;"><b>CANT.</b></div>
+                        <div id="tituloprecio" class="col-4 mt-3 p-0" style="font-size: 15px;"><b>PRECIO</b></div>
+                        <div class="col-2 p-0 text-center"> <button type="button" class="btn-close" style="width: 5%;"
+                            data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
+                </h5>
+                <div class="offcanvas-body">
+                  <div id="carritoVacio"></div>
+                  <div id="CarritoDesplegable"></div>
+                </div>
+    
+              </div>
+    
+              <div class="container">
+                <hr>
+                <div class="row my-3 align-items-center">
+                  <div class="col-6">
+                    <div class="col-12 my-3 text-center">
+                      <button class="btn btn-dark p-2" href="cart.html" id="finalizarCompra"
+                        style="font-size: 15px; border-radius: 0; background: #000000">FINALIZAR
+                        COMPRA</button>
+                    </div>
+                    <div class="col-12 text-center">
+                      <a class="cursor-active " data-bs-dismiss="offcanvas"
+                        style="font-size: 12px; text-decoration: none;color: #000000;"><b> Cerrar y continuar
+                          comprando</b></a>
+                    </div>
+                  </div>
+    
+                  <div class="col-6 ">
+                    <div class="vr"></div>
+                    <div class="row">
+                      <div class="col-6 p-0 text-end"><b> Importe Total :</b></div>
+                      <div class="col-6 px-1 text-start" id="ImporteTotal"> USD 0</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </h5>
-
-      <div class="offcanvas-body">
-        <div id="carritoVacio"></div>
-        <div id="CarritoDesplegable"></div>
-      </div>
-
-    </div>
-
-    <div class="container">
-      <hr>
-
-
-      <div class="row my-3 align-items-center">
-        <div class="col-6">
-          <div class="col-12 my-3 text-center">
-            <button class="btn btn-dark p-2" href="cart.html" id="finalizarCompra"
-              style="font-size: 15px; border-radius: 0; background: #000000">FINALIZAR
-              COMPRA</button>
-          </div>
-          <div class="col-12 text-center">
-            <a class="cursor-active " data-bs-dismiss="offcanvas"
-              style="font-size: 12px; text-decoration: none;color: #000000;"><b> Cerrar y continuar comprando</b></a>
-          </div>
-        </div>
-
-        <div class="col-6 ">
-          <div class="vr"></div>
-          <div class="row">
-            <div class="col-6 p-0 text-end"><b> Importe Total :</b></div>
-            <div class="col-6 px-1 text-start" id="ImporteTotal"> USD 0</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
       </div>
     </div>
   </div>
+
+</main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">

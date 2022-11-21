@@ -13,39 +13,55 @@
 </head>
 
 <body>
-  <nav  class="navbar navbar-expand-lg navbar-light bg-light p-1">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light p-1">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
+
+        <ul class="navbar-nav w-100 justify-content-between desplegableUsuario">
           <li class="nav-item">
-            <a class="nav-link" href="#"><img src="https://jovenesaprogramar.edu.uy/storage/app/media/logo-jap-2022.svg" alt="" style="width: 120%;"></a>
+            <a class="nav-link" href="#"><img src="https://jovenesaprogramar.edu.uy/storage/app/media/logo-jap-2022.svg"
+                alt="" style="width: 120%;"></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorias</a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle col-3 px-0 pt-2" href="#" id="navSesion"  role="button" data-bs-toggle="dropdown" aria-expanded="false"> </a>
-            <ul class="dropdown-menu ">
-              <li><a class="dropdown-item mr-3" href="cart.html"><img src="img/bolsa-de-la-compra.png" class="mx-1">Mi carrito</i></a></li>
-              <li><a class="dropdown-item mr-3" href="my-profile.html"><img src="img/perfil.png" class="mx-1 ">Mi perfil</a></li>
-              <li><a class="dropdown-item ml-5" id="CerrarSesion"><img src="img/cerrar-sesion.png" class="mx-1" >Cerrar sesion</a></li>
+          <div class="row justify-content-between">
+            <li class="nav-item dropdown  col-auto col-md-3">
+              <a class="nav-link dropdown-toggle  col-md-6 px-0 pt-2" href="#" id="navSesion" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false"> </a>
+              <ul class="dropdown-menu ">
+                <li><a class="dropdown-item mr-3" href="cart.html"><img src="img/bolsa-de-la-compra.png" class="mx-1">Mi
+                    carrito</i></a></li>
+                <li><a class="dropdown-item mr-3" href="my-profile.html"><img src="img/perfil.png" class="mx-1 ">Mi
+                    perfil</a></li>
+                <li><a class="dropdown-item ml-5" id="CerrarSesion"><img src="img/cerrar-sesion.png" class="mx-1">Cerrar
+                    sesion</a></li>
               </ul>
-          </li>
-          <div class="row p-0 align-items-center">
-                
-            <a class=" col-6 p-0 align-items-center" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-              aria-controls="offcanvasExample" style="position: relative;"><img src="img/carrito-de-compras.png" style="position: relative;"><span  id="contadorArticulos">0</span> </a> 
-            
+
+            </li>
+
+            <div class="col-4 col-md-1 align-items-center text-center p-2 ">
+
+              <a class="p-0" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+                aria-controls="offcanvasExample" style="position: relative;"><img src="img/carrito-de-compras.png"
+                  style="position: relative;"><span id="contadorArticulos">0</span> </a>
+
             </div>
+          </div>
         </ul>
       </div>
+    </div>
     </div>
   </nav>
   <main class="pb-5 pagina-productos">
@@ -96,59 +112,63 @@
 
 
 <!-- carrito apartado individual  -->
-<div class="offcanvas offcanvas-start justify-content-between" style="width: 30%;" tabindex="-1"
-id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-<div class="container">
-  <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-    <div class="mx-1 row my-2 justify-content-between">
-      <div class=" ml-2 col-5 mt-3" id="numArticulos" style="font-size: 15px;"></div>
+<div class="row">
+  <div class="col-auto">
+    <div class="offcanvas offcanvas-start justify-content-between" style="mask-border-width: 30%; color: black;" tabindex="-1"
+      id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="container">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+          <div class="mx-1 row my-2 justify-content-between">
+            <div class=" ml-2 col-5 mt-3" id="numArticulos" style="font-size: 15px;"></div>
 
-      <div class="col-6 text-end ">
-        <div class="row justify-content-between">
-          <div id="titulocant" class="col-3 mt-3 p-0" style="font-size: 15px;"><b>CANT.</b></div>
-          <div id="tituloprecio" class="col-4 mt-3 p-0" style="font-size: 15px;"><b>PRECIO</b></div>
-          <div class="col-2 p-0 text-center"> <button type="button" class="btn-close" style="width: 5%;"
-              data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <div class="col-6 text-end ">
+              <div class="row justify-content-between">
+                <div id="titulocant" class="col-3 mt-3 p-0" style="font-size: 15px;"><b>CANT.</b></div>
+                <div id="tituloprecio" class="col-4 mt-3 p-0" style="font-size: 15px;"><b>PRECIO</b></div>
+                <div class="col-2 p-0 text-center"> <button type="button" class="btn-close" style="width: 5%;"
+                    data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </h5>
+        <div class="offcanvas-body">
+          <div id="carritoVacio"></div>
+          <div id="CarritoDesplegable"></div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <hr>
+        <div class="row my-3 align-items-center">
+          <div class="col-6">
+            <div class="col-12 my-3 text-center">
+              <button class="btn btn-dark p-2" href="cart.html" id="finalizarCompra"
+                style="font-size: 15px; border-radius: 0; background: #000000">FINALIZAR
+                COMPRA</button>
+            </div>
+            <div class="col-12 text-center">
+              <a class="cursor-active " data-bs-dismiss="offcanvas"
+                style="font-size: 12px; text-decoration: none;color: #000000;"><b> Cerrar y continuar
+                  comprando</b></a>
+            </div>
+          </div>
+
+          <div class="col-6 ">
+            <div class="vr"></div>
+            <div class="row">
+              <div class="col-6 p-0 text-end"><b> Importe Total :</b></div>
+              <div class="col-6 px-1 text-start" id="ImporteTotal"> USD 0</div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
-  </h5>
-
-  <div class="offcanvas-body">
-    <div id="carritoVacio"></div>
-    <div id="CarritoDesplegable"></div>
   </div>
-
 </div>
-
-<div class="container">
-  <hr>
-
-
-  <div class="row my-3 align-items-center">
-    <div class="col-6">
-      <div class="col-12 my-3 text-center">
-        <button class="btn btn-dark p-2" href="cart.html" id="finalizarCompra" style="font-size: 15px; border-radius: 0; background: #000000">FINALIZAR
-          COMPRA</button>
-      </div>
-      <div class="col-12 text-center">
-        <a class="cursor-active " data-bs-dismiss="offcanvas" style="font-size: 12px; text-decoration: none;color: #000000;"><b> Cerrar y continuar comprando</b></a>
-      </div>
-    </div>
-    
-    <div class="col-6 ">
-      <div class="vr"></div>
-      <div class="row">
-      <div class="col-6 p-0 text-end"><b> Importe Total :</b></div>
-      <div class="col-6 px-1 text-start" id="ImporteTotal"> USD 0</div>
-    </div>
-  </div>
-  </div>
-
-</div>
-</div>
-
 
   </main>
   <footer class="text-muted">
