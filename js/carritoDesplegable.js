@@ -92,7 +92,7 @@ function mostrarCarritogeneral() {
                 src="${objeto.image}" style="width:100%"></a></div>
                 <div class="col-3">${objeto.name}</div>
 
-                <div class="col-2 cursor-active"><input type="number" step="1" class="text-center campoValorCarritoGeneral" oninput="valorCantidad(${objeto.id})" style="width:80%; border-radius:5px" value="${objeto.cantidad}" min="1">
+                <div class="col-2 cursor-active"><input type="number" step="1" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1" autocomplete="off"  class="text-center campoValorCarritoGeneral" oninput="valorCantidad(${objeto.id})" style="width:80%; border-radius:5px" value="${objeto.cantidad}">
                 </div>
 
                 <div class="col-3 mostrarPrecio" style="font-size:15px"> ${objeto.currency} ${convertir(precio)}</div>
@@ -109,9 +109,8 @@ function mostrarCarritogeneral() {
                 if (objeto.currency === "UYU") { importeTotal += Math.floor(objeto.cantidad * (objeto.cost / 40)) }
 
                 else { importeTotal += objeto.cantidad * objeto.cost; }
-
-                document.getElementById('ImporteTotal').innerHTML = "USD" + " " + convertir(importeTotal)
-
+                
+                document.getElementById('ImporteTotal').innerHTML = "USD" + " " + convertir(importeTotal);
             }
             moverCantArticulos.push(cantidadDeArticulos)
         }
@@ -145,8 +144,7 @@ function eliminarProdCartGeneral(id) {//funcion que toma como parametro la id de
             //actualizo lo que veo en pantalla.
 
              mostrarCarritogeneral();
-             
-            
+                     
         }
     }
       

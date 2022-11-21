@@ -2,6 +2,7 @@ const login = document.getElementById('inicio');//traigo los campos que voy a ut
 const email = document.getElementById('campo-email');
 const password = document.getElementById('campo-password');
 const contenedor = document.getElementsByTagName('label');
+let usuariosEnLocal = JSON.parse(localStorage.getItem('usuarios'))
 let todosLosUsuarios=[];
 
 login.addEventListener('click', () => {
@@ -77,8 +78,32 @@ function moverCampoPassword() {
 	document.getElementById('campo-password').id="moverPasswordAlert"
 }
 
+window.google = function(){
+	
+	if(localStorage.getItem('usuarios')==null){
+		localStorage.setItem('usuarios','[]');
+	 }
+
+	 let usuariosEnLocal = JSON.parse(localStorage.getItem('usuarios'))
 
 
+	  usuario = {
+		 "nombreUsuario": "proximamente...",
+		 "infoPerfil": "",
+		 "enCarrito": "",
+		 
 
+	 }
 
+	   if(usuariosEnLocal.some(usuario=>usuario.nombreUsuario === "proximamente...")){
+		 localStorage.setItem("usuarioActivo",JSON.stringify("proximamente..."))
+		 window.location.href= "index.html";
+	   }else{
 
+		 usuariosEnLocal.push(usuario)
+		 localStorage.setItem("usuarioActivo",JSON.stringify("proximamente..."))
+		 localStorage.setItem("usuarios",JSON.stringify(usuariosEnLocal));
+		 window.location.href= "index.html";
+	   }
+	};
+  

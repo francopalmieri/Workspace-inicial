@@ -92,7 +92,7 @@ function showProductsList() {
                         <div class="col">
                             <div class="d-flex justify-content-between">
                                 <h4 class="mb-3 mx-3">${categoryP.currency} ${convertir(categoryP.cost)}</h4>
-                                <small class="text-muted mx-2">${categoryP.soldCount} artículos</small>    
+                                <small class="numArticlesPageProd mx-2">${categoryP.soldCount} artículos</small>    
                             </div> 
                             
                             <p class="mb-3 mx-2" id="prodDescription"  >${categoryP.description}</p>

@@ -21,8 +21,6 @@ if (segundoComments < 10) segundoComments = '0' + segundoComments;
 
 MyDateString = anioComments + '-' + mesComments + '-' + diaComments + ' ' + horaComments + ':' + minutoComments + ':' + segundoComments;
 
-
-
 function convertir(numero) {
 	//se convierte el numero a cadena con +"" en numero 
 	numero = numero + "";
@@ -184,7 +182,8 @@ function similarProducts() {
 }
 
 function showComments() {
-	console.log('entro a showComments')
+
+	console.log('entro a showComments');
 	let commentsArray = infoCommentsArray;
 	let htmlComments = "";
 
@@ -209,13 +208,8 @@ function showComments() {
 
 	document.getElementById("info-comments").innerHTML = htmlComments;
 
-
-
 	let usuarioGeneral = JSON.parse(localStorage.getItem('usuarios'));
 	let usuarioEnActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-
-
-
 
 	for (usuario of usuarioGeneral) {
 		if (usuario.nombreUsuario === usuarioEnActivo) {
@@ -225,7 +219,7 @@ function showComments() {
 			//muestro los que incluyan la id del producto en el que me encuentro
 			//entonces lo muestro en mi pagina
 
-		if(usuario.comentariosCarrito.length>0){
+		if(usuario.comentariosCarrito.length!=""){
 
 				for (let i = 0; i < usuario.comentariosCarrito.length; i++) {
 					let comentario = usuario.comentariosCarrito[i];
@@ -234,10 +228,9 @@ function showComments() {
 
 						let agregarComment = ""
 						agregarComment = `
-						<div class="my-3 col-sm-12 list-group-item addComment">
+						<div class="my-3 col-sm-12 list-group-item addComment rounded">
 							<p><b>${comentario.nombreUsuario}</b> - ${comentario.fechaActual} - ${comentario.calificacion}</p>
 							<p>${comentario.espacioDeTexto}</p></div> `
-
 
 						document.getElementById("info-comments").innerHTML += agregarComment;
 					}
