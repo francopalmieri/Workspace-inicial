@@ -5,7 +5,6 @@ const CATEGORIES_URL = "https://japceibal.github.io/emercado-api/cats/cat.json";
 const PRODUCT_LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + EXT_TYPE;
 const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/" + localStorage.getItem("productID") + EXT_TYPE;
 const PRODUCT_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/" + localStorage.getItem("productID") + EXT_TYPE;
-
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_INFO_PEUGEOUT = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
@@ -44,7 +43,7 @@ let getJSONData = function (url) {
 
 document.addEventListener('DOMContentLoaded', () => {
     let usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
-   if(usuarioActivo==null){location.href="login.html" }
+   if(usuarioActivo==null){location.href="login.html" };
   document.getElementById('navSesion').innerHTML = usuarioActivo;
 })
 

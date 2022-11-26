@@ -48,31 +48,28 @@ function eliminarProdCart(id) {//funcion que toma como parametro la id del produ
   for (usuario of usuariosEnLocal) {
     if (usuario.nombreUsuario === usuarioActivo) {
 
-  //recorro los elementos del array para que me devuelva la posicion de aquel que incluya el id que le estoy proporcionanado
-  //tanto para el array del formato de los productos como para sus propios objetos 
+      //recorro los elementos del array para que me devuelva la posicion de aquel que incluya el id que le estoy proporcionanado
+      //tanto para el array del formato de los productos como para sus propios objetos 
 
-  let eliminarDelArray = listaElementos.findIndex(element => element.includes(id));
-  let eliminarDelAlmacenamiento = usuario.enCarrito.findIndex(element => element.id === id);
+      let eliminarDelArray = listaElementos.findIndex(element => element.includes(id));
+      let eliminarDelAlmacenamiento = usuario.enCarrito.findIndex(element => element.id === id);
 
-  //utilizo el metodo splice() para eliminar la posicion ya establecida de mi array en los dos casos 
-  listaElementos.splice(eliminarDelArray, 1);
-  usuario.enCarrito.splice(eliminarDelAlmacenamiento, 1);
+      //utilizo el metodo splice() para eliminar la posicion ya establecida de mi array en los dos casos 
+      listaElementos.splice(eliminarDelArray, 1);
+      usuario.enCarrito.splice(eliminarDelAlmacenamiento, 1);
 
-  //actualizo el almacenamiento local mandandole el array de objetos modificado. 
-  localStorage.setItem('usuarios', JSON.stringify(usuariosEnLocal));
+      //actualizo el almacenamiento local mandandole el array de objetos modificado. 
+      localStorage.setItem('usuarios', JSON.stringify(usuariosEnLocal));
 
-  //actualizo lo que veo en pantalla con el metodo join para sustituir las comas .
+      //actualizo lo que veo en pantalla con el metodo join para sustituir las comas .
 
-  document.getElementById('verObjetoCarrito').innerHTML = listaElementos.join('');
+      document.getElementById('verObjetoCarrito').innerHTML = listaElementos.join('');
 
-
-
-//condicional para redirigiar al index en caso
-  // de que no exista un producto en el carrito
-  if (usuario.enCarrito.length === 0) { window.location = 'index.html'; }
- }
-}
-  
+      //condicional para redirigiar al index en caso
+      // de que no exista un producto en el carrito
+      if (usuario.enCarrito.length === 0) { window.location = 'index.html'; }
+    }
+  }
   // llamo a la funcion conversionUSD para verificar si debo convertirlo a usd en el subtotal o no
   conversionUSD();
   //ejecuto el tipo de envio respecto al numero especifico de esa variable general
@@ -273,11 +270,11 @@ function costoEnvioStandard() {
 // se ejecute esa funcion que guarde antes.
 // le doy un checked a ese campo
 function tipoEnvioLocalStorage() {
-  let metodoSeleccionado = JSON.parse(localStorage.getItem('metodoEnvio'));
+  let tipoEnvioSeleccionado = JSON.parse(localStorage.getItem('metodoEnvio'));
 
-  if (metodoSeleccionado === 1) { costoEnvioPremium(), document.getElementById('cartPremium').checked = true }
-  else if (metodoSeleccionado === 2) { costoEnvioExpress(), document.getElementById('cartExpress').checked = true }
-  else if (metodoSeleccionado === 3) { costoEnvioStandard(), document.getElementById('cartStandard').checked = true }
+  if (tipoEnvioSeleccionado === 1) { costoEnvioPremium(), document.getElementById('cartPremium').checked = true }
+  else if (tipoEnvioSeleccionado === 2) { costoEnvioExpress(), document.getElementById('cartExpress').checked = true }
+  else if (tipoEnvioSeleccionado === 3) { costoEnvioStandard(), document.getElementById('cartStandard').checked = true }
 
 }
 
@@ -363,7 +360,7 @@ function habilitarCampoModal() {
     document.getElementById('numCuenta').disabled = false;
   })
 }
-
+let usuarioActivo = JSON.parse(localStorage.getItem('usuarioActivo'));
 //cuando el modal se cierre se valida el formulario contenido
 function validarModal() {
   document.getElementById('modal-metodoDePago').addEventListener('hidden.bs.modal', () => {
@@ -412,10 +409,9 @@ function mostrarAlertaDeCompra() {
 
 }
 
-//valido todo el formualrio de mi pagina 
+//valido todo el formulario de mi pagina 
 //incluyendo los campos de cantidad de los productos
 function validarCarrito() {
-
   document.getElementById('botonCompra').addEventListener('click', (e) => {
 
     let formCart = document.getElementById('formularioCarrito');
@@ -424,8 +420,11 @@ function validarCarrito() {
       e.stopPropagation();
       e.preventDefault();
 
-    } else { setTimeout(() => { mostrarAlertaDeCompra() }, 1000); }
+    } else {
+      setTimeout(() => { mostrarAlertaDeCompra() }, 1000);
+      envioInfoCompraCliente()
 
+    }
     formCart.classList.add('was-validated');
     e.preventDefault();
   })
@@ -445,4 +444,67 @@ document.addEventListener('DOMContentLoaded', () => {
   validarModal()
 })
 
+//DESAFIATE 8
+function envioInfoCompraCliente() {
 
+const urlCarrito = 'http://localhost:3000/carrito';
+
+if(localStorage.getItem('metodoEnvio')){
+  let tipoEnvioSeleccionado = JSON.parse(localStorage.getItem('metodoEnvio'));
+
+  if (tipoEnvioSeleccionado === 1) { tipoEnvio = "Premium" }
+  else if (tipoEnvioSeleccionado === 2) { tipoEnvio = "Express" }
+  else if (tipoEnvioSeleccionado === 3) { tipoEnvio = "Standart" }
+}
+
+  //traigo los valores que voy a mandar del usuario
+  if (metodoAlternar == 1) { FormaPago = "Tarjeta de Credito" }
+  else { FormaPago = "Transferencia Bancaria" };
+
+  let calleDir = document.getElementById('calle').value
+  let esquinaDir = document.getElementById('esquina').value
+  let numeroDir = document.getElementById('numeroDireccion').value
+
+  let tarjeta = document.getElementById('numeroTarjeta').value
+  let codigoSeg = document.getElementById('codigoSeg').value
+  let vencimiento = document.getElementById('tarjetaVencimiento').value
+  let transferencia = document.getElementById('numCuenta').value
+ 
+if(FormaPago=="Tarjeta de Credito"){
+  FormaPago={
+    FormaPago,
+  "numeroTarjeta":tarjeta,
+  "codigoDeSeguridad":codigoSeg,
+  "vencimiento":vencimiento
+
+  }
+}else{
+  FormaPago={
+    FormaPago,
+    "numeroCuenta":transferencia
+    }
+}
+
+
+  let enviarDatosCarrito = {
+    "usuario": usuarioActivo,
+    "tipoEnvio": tipoEnvio,
+    "calle": calleDir,
+    "esquina": esquinaDir,
+    "numero": numeroDir,
+    "formaDePago": FormaPago
+
+  }
+console.log(enviarDatosCarrito)
+  fetch(urlCarrito, {
+    method: 'POST',
+    body: JSON.stringify(enviarDatosCarrito),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response));
+
+
+}
