@@ -60,9 +60,10 @@ function mostrarCarritogeneral() {
 
             if (usuario.enCarrito.length === 0) {
                 document.getElementById('contadorArticulos').style.display = 'none';
-
-                document.getElementById('titulocant').innerHTML = ""
-                document.getElementById('tituloprecio').innerHTML = ""
+                document.getElementById('CarritoDesplegable').innerHTML = "";
+                document.getElementById('titulocant').innerHTML = "";
+                document.getElementById('numArticulos').innerHTML= "";
+                document.getElementById('tituloprecio').innerHTML = "";
                 document.getElementById('finalizarCompra').disabled = true;
 
                 let carritoSinProductos = `
@@ -91,14 +92,14 @@ function mostrarCarritogeneral() {
                 src="${objeto.image}" style="width:100%"></a></div>
                 <div class="col-3">${objeto.name}</div>
 
-                <div class="col-2 cursor-active"><input type="number" step="1" class="text-center campoValorCarritoGeneral" oninput="valorCantidad(${objeto.id})" style="width:80%; border-radius:5px" value="${objeto.cantidad}" min="1">
+                <div class="col-2 cursor-active"><input type="number" step="1" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" min="1" autocomplete="off"  class="text-center campoValorCarritoGeneral" oninput="valorCantidad(${objeto.id})" style="width:80%; border-radius:5px" value="${objeto.cantidad}">
                 </div>
 
                 <div class="col-3 mostrarPrecio" style="font-size:15px"> ${objeto.currency} ${convertir(precio)}</div>
 
                 <div class="col-1 cursor-active basura" onclick="eliminarProdCartGeneral(${objeto.id})"><img src="img/basura.png"></div> 
             </div> 
-
+            
  `;
 
                 document.getElementById('CarritoDesplegable').innerHTML = mostrarObjeto;
@@ -108,9 +109,8 @@ function mostrarCarritogeneral() {
                 if (objeto.currency === "UYU") { importeTotal += Math.floor(objeto.cantidad * (objeto.cost / 40)) }
 
                 else { importeTotal += objeto.cantidad * objeto.cost; }
-
-                document.getElementById('ImporteTotal').innerHTML = "USD" + " " + convertir(importeTotal)
-
+                
+                document.getElementById('ImporteTotal').innerHTML = "USD" + " " + convertir(importeTotal);
             }
             moverCantArticulos.push(cantidadDeArticulos)
         }
@@ -144,10 +144,7 @@ function eliminarProdCartGeneral(id) {//funcion que toma como parametro la id de
             //actualizo lo que veo en pantalla.
 
              mostrarCarritogeneral();
-             
-            if (usuario.enCarrito.length === 0) {
-                location.reload()
-            }
+                     
         }
     }
       
@@ -163,4 +160,5 @@ document.getElementById("finalizarCompra").addEventListener("click", function ()
 });
 
 
-
+ 
+//documentacion de la funcion convertir(numero) en stackoverFlow
